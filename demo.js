@@ -17190,7 +17190,7 @@ var author$project$Main$view = function (model) {
 			[
 				author$project$Main$body(model)
 			]),
-		cN: 'The elm-mdc library'
+		cN: 'Material Components for Elm'
 	};
 };
 var elm$browser$Browser$application = _Browser_application;
