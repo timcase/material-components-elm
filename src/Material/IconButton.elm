@@ -29,8 +29,8 @@ iconButtonConfig =
     }
 
 
-iconButton : IconButtonConfig msg -> String -> Html msg
-iconButton config iconName =
+iconButton : String -> IconButtonConfig msg -> String -> Html msg
+iconButton id config iconName =
     Html.node "mdc-icon-button"
         (List.filterMap identity
             [ rootCs
@@ -43,8 +43,8 @@ iconButton config iconName =
         [ text iconName ]
 
 
-customIconButton : IconButtonConfig msg -> List (Html msg) -> Html msg
-customIconButton config nodes =
+customIconButton : String -> IconButtonConfig msg -> List (Html msg) -> Html msg
+customIconButton id config nodes =
     Html.node "mdc-icon-button"
         (List.filterMap identity
             [ rootCs
@@ -61,8 +61,8 @@ iconToggleConfig =
     iconButtonConfig
 
 
-iconToggle : IconButtonConfig msg -> { on : String, off : String } -> Html msg
-iconToggle config { on, off } =
+iconToggle : String -> IconButtonConfig msg -> { on : String, off : String } -> Html msg
+iconToggle id config { on, off } =
     Html.node "mdc-icon-button"
         (List.filterMap identity
             [ rootCs

@@ -96,8 +96,8 @@ snackbarConfig =
     }
 
 
-snackbar : (Msg msg -> msg) -> SnackbarConfig msg -> Queue msg -> Html msg
-snackbar lift config queue =
+snackbar : String -> (Msg msg -> msg) -> SnackbarConfig msg -> Queue msg -> Html msg
+snackbar id lift config queue =
     let
         message =
             Maybe.withDefault snackbarMessage (List.head queue.messages)

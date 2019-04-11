@@ -54,18 +54,18 @@ drawer config nodes =
         nodes
 
 
-permanentDrawer : DrawerConfig msg -> List (Html msg) -> Html msg
-permanentDrawer config nodes =
+permanentDrawer : String -> DrawerConfig msg -> List (Html msg) -> Html msg
+permanentDrawer id config nodes =
     drawer { config | variant = Permanent } nodes
 
 
-dismissibleDrawer : DrawerConfig msg -> List (Html msg) -> Html msg
-dismissibleDrawer config nodes =
+dismissibleDrawer : String -> DrawerConfig msg -> List (Html msg) -> Html msg
+dismissibleDrawer id config nodes =
     drawer { config | variant = Dismissible } nodes
 
 
-modalDrawer : DrawerConfig msg -> List (Html msg) -> Html msg
-modalDrawer config nodes =
+modalDrawer : String -> DrawerConfig msg -> List (Html msg) -> Html msg
+modalDrawer id config nodes =
     drawer { config | variant = Modal } nodes
 
 

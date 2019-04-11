@@ -1,6 +1,7 @@
 module Material.TabBar exposing
     ( Tab
     , TabBarConfig
+    , TabConfig
     , TabScrollerAlign(..)
     , TabScrollerConfig
     , tab
@@ -29,8 +30,8 @@ tabBarConfig =
     }
 
 
-tabBar : TabBarConfig msg -> List (Tab msg) -> Html msg
-tabBar config tabs =
+tabBar : String -> TabBarConfig msg -> List (Tab msg) -> Html msg
+tabBar id config tabs =
     Html.node "mdc-tab-bar"
         (List.filterMap identity
             [ rootCs

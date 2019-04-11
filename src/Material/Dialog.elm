@@ -28,8 +28,8 @@ type alias DialogContent msg =
     }
 
 
-dialog : DialogConfig msg -> DialogContent msg -> Html msg
-dialog config content =
+dialog : String -> DialogConfig msg -> DialogContent msg -> Html msg
+dialog id config content =
     Html.node "mdc-dialog"
         (List.filterMap identity
             [ rootCs

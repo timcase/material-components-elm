@@ -30,8 +30,8 @@ type RippleColor
     | AccentColor
 
 
-ripple : RippleConfig msg -> Html msg
-ripple config =
+ripple : String -> RippleConfig msg -> Html msg
+ripple id config =
     Html.node "mdc-ripple"
         (List.filterMap identity
             [ dataUnboundedAttr config
@@ -48,9 +48,9 @@ ripple config =
         []
 
 
-unboundedRipple : RippleConfig msg -> Html msg
-unboundedRipple config =
-    ripple { config | unbounded = True }
+unboundedRipple : String -> RippleConfig msg -> Html msg
+unboundedRipple id config =
+    ripple id { config | unbounded = True }
 
 
 rippleSurface : Maybe (Html.Attribute msg)

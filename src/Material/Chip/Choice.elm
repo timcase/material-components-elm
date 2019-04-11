@@ -21,8 +21,8 @@ choiceChipConfig =
     }
 
 
-choiceChip : ChoiceChipConfig msg -> String -> Html msg
-choiceChip config label =
+choiceChip : String -> ChoiceChipConfig msg -> String -> Html msg
+choiceChip id config label =
     Html.node "mdc-chip"
         (List.filterMap identity
             [ rootCs

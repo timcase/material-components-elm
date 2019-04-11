@@ -37,8 +37,8 @@ checkboxConfig =
     }
 
 
-checkbox : CheckboxConfig msg -> Html msg
-checkbox config =
+checkbox : String -> CheckboxConfig msg -> Html msg
+checkbox id config =
     Html.node "mdc-checkbox"
         (List.filterMap identity
             [ rootCs

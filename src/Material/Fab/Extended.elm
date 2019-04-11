@@ -21,8 +21,8 @@ extendedFabConfig =
     }
 
 
-extendedFab : ExtendedFabConfig msg -> String -> Html msg
-extendedFab config label =
+extendedFab : String -> ExtendedFabConfig msg -> String -> Html msg
+extendedFab id config label =
     Html.node "mdc-fab"
         (List.filterMap identity
             [ rootCs

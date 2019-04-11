@@ -37,8 +37,8 @@ cardConfig =
     }
 
 
-card : CardConfig msg -> CardContent msg -> Html msg
-card config content =
+card : String -> CardConfig msg -> CardContent msg -> Html msg
+card id config content =
     Html.node "mdc-card"
         (List.filterMap identity
             [ rootCs
@@ -240,8 +240,9 @@ type Button msg
 
 cardActionButton : ButtonConfig msg -> String -> Button msg
 cardActionButton buttonConfig label =
+    -- TODO: id?
     Button <|
-        Material.Button.textButton
+        Material.Button.textButton ""
             { buttonConfig
                 | additionalAttributes =
                     class "mdc-card__action"

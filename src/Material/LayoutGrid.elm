@@ -32,8 +32,8 @@ type Device
     | Phone
 
 
-layoutGrid : List (Html.Attribute msg) -> List (Html msg) -> Html msg
-layoutGrid attributes nodes =
+layoutGrid : String -> List (Html.Attribute msg) -> List (Html msg) -> Html msg
+layoutGrid id attributes nodes =
     Html.node "mdc-layout-grid"
         (class "mdc-layout-grid" :: style "display" "block" :: attributes)
         nodes

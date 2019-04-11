@@ -61,8 +61,8 @@ textFieldConfig =
     }
 
 
-textField : TextFieldConfig msg -> Html msg
-textField config =
+textField : String -> TextFieldConfig msg -> Html msg
+textField id config =
     Html.node "mdc-text-field"
         (List.filterMap identity
             [ rootCs

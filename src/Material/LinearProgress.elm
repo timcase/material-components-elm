@@ -56,18 +56,26 @@ linearProgress config =
         ]
 
 
-indeterminateLinearProgress : LinearProgressConfig msg -> Html msg
-indeterminateLinearProgress config =
+indeterminateLinearProgress : String -> LinearProgressConfig msg -> Html msg
+indeterminateLinearProgress id config =
     linearProgress { config | variant = Indeterminate }
 
 
-determinateLinearProgress : LinearProgressConfig msg -> { progress : Float } -> Html msg
-determinateLinearProgress config { progress } =
+determinateLinearProgress :
+    String
+    -> LinearProgressConfig msg
+    -> { progress : Float }
+    -> Html msg
+determinateLinearProgress id config { progress } =
     linearProgress { config | variant = Determinate progress }
 
 
-bufferedLinearProgress : LinearProgressConfig msg -> { progress : Float, buffered : Float } -> Html msg
-bufferedLinearProgress config { progress, buffered } =
+bufferedLinearProgress :
+    String
+    -> LinearProgressConfig msg
+    -> { progress : Float, buffered : Float }
+    -> Html msg
+bufferedLinearProgress id config { progress, buffered } =
     linearProgress { config | variant = Buffered progress buffered }
 
 

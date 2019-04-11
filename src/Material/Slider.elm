@@ -40,8 +40,8 @@ sliderConfig =
     }
 
 
-slider : SliderConfig msg -> Html msg
-slider config =
+slider : String -> SliderConfig msg -> Html msg
+slider id config =
     Html.node "mdc-slider"
         (List.filterMap identity
             [ rootCs

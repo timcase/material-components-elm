@@ -63,13 +63,13 @@ select config nodes =
         )
 
 
-filledSelect : SelectConfig msg -> List (SelectOption msg) -> Html msg
-filledSelect config nodes =
+filledSelect : String -> SelectConfig msg -> List (SelectOption msg) -> Html msg
+filledSelect id config nodes =
     select { config | variant = Filled } nodes
 
 
-outlinedSelect : SelectConfig msg -> List (SelectOption msg) -> Html msg
-outlinedSelect config nodes =
+outlinedSelect : String -> SelectConfig msg -> List (SelectOption msg) -> Html msg
+outlinedSelect id config nodes =
     select { config | variant = Outlined } nodes
 
 

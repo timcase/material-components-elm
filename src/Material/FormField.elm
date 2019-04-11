@@ -24,8 +24,8 @@ formFieldConfig =
     }
 
 
-formField : FormFieldConfig msg -> List (Html msg) -> Html msg
-formField config nodes =
+formField : String -> FormFieldConfig msg -> List (Html msg) -> Html msg
+formField id config nodes =
     Html.node "mdc-form-field"
         (List.filterMap identity [ rootCs, alignEndCs config ]
             ++ config.additionalAttributes

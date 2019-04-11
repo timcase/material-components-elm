@@ -65,13 +65,13 @@ enhancedSelect config nodes =
         )
 
 
-filledEnhancedSelect : EnhancedSelectConfig msg -> List (Html msg) -> Html msg
-filledEnhancedSelect config nodes =
+filledEnhancedSelect : String -> EnhancedSelectConfig msg -> List (Html msg) -> Html msg
+filledEnhancedSelect id config nodes =
     enhancedSelect { config | variant = Filled } nodes
 
 
-outlinedEnhancedSelect : EnhancedSelectConfig msg -> List (Html msg) -> Html msg
-outlinedEnhancedSelect config nodes =
+outlinedEnhancedSelect : String -> EnhancedSelectConfig msg -> List (Html msg) -> Html msg
+outlinedEnhancedSelect id config nodes =
     enhancedSelect { config | variant = Outlined } nodes
 
 
@@ -191,7 +191,8 @@ menuElt nodes =
 
 listElt : List (Html msg) -> Html msg
 listElt nodes =
-    list listConfig nodes
+    -- TODO: id?
+    list "" listConfig nodes
 
 
 floatingLabelElt : EnhancedSelectConfig msg -> Html msg

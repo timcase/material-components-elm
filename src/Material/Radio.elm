@@ -23,8 +23,8 @@ radioConfig =
     }
 
 
-radio : RadioConfig msg -> Html msg
-radio config =
+radio : String -> RadioConfig msg -> Html msg
+radio id config =
     Html.node "mdc-radio"
         (List.filterMap identity
             [ rootCs

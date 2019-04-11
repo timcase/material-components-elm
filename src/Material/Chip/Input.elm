@@ -23,8 +23,8 @@ inputChipConfig =
     }
 
 
-inputChip : InputConfig msg -> String -> Html msg
-inputChip config label =
+inputChip : String -> InputConfig msg -> String -> Html msg
+inputChip id config label =
     Html.node "mdc-chip"
         (List.filterMap identity
             [ rootCs

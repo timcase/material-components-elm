@@ -25,8 +25,8 @@ filterChipConfig =
     }
 
 
-filterChip : FilterChipConfig msg -> String -> Html msg
-filterChip config label =
+filterChip : String -> FilterChipConfig msg -> String -> Html msg
+filterChip id config label =
     Html.node "mdc-chip"
         (List.filterMap identity
             [ rootCs

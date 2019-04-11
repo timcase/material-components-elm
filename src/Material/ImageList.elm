@@ -27,8 +27,8 @@ imageListConfig =
     }
 
 
-imageList : ImageListConfig msg -> List (ImageListItem msg) -> Html msg
-imageList config listItems =
+imageList : String -> ImageListConfig msg -> List (ImageListItem msg) -> Html msg
+imageList id config listItems =
     Html.node "mdc-image-list"
         (List.filterMap identity
             [ rootCs

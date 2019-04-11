@@ -19,8 +19,8 @@ fabConfig =
     }
 
 
-fab : FabConfig msg -> String -> Html msg
-fab config iconName =
+fab : String -> FabConfig msg -> String -> Html msg
+fab id config iconName =
     Html.node "mdc-fab"
         (List.filterMap identity
             [ rootCs

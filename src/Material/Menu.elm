@@ -23,8 +23,8 @@ menuConfig =
     }
 
 
-menu : MenuConfig msg -> List (Html msg) -> Html msg
-menu config nodes =
+menu : String -> MenuConfig msg -> List (Html msg) -> Html msg
+menu id config nodes =
     Html.node "mdc-menu"
         (List.filterMap identity
             [ rootCs

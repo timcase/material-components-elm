@@ -43,8 +43,8 @@ listConfig =
     }
 
 
-list : ListConfig msg -> List (Html msg) -> Html msg
-list config nodes =
+list : String -> ListConfig msg -> List (Html msg) -> Html msg
+list id config nodes =
     Html.node "mdc-list"
         (List.filterMap identity
             [ rootCs
@@ -118,8 +118,8 @@ listItemConfig =
     }
 
 
-listItem : ListItemConfig msg -> List (Html msg) -> Html msg
-listItem config nodes =
+listItem : String -> ListItemConfig msg -> List (Html msg) -> Html msg
+listItem id config nodes =
     Html.node "mdc-list-item"
         (List.filterMap identity
             [ listItemCs

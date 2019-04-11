@@ -47,8 +47,8 @@ topAppBarConfig =
     }
 
 
-topAppBar : TopAppBarConfig msg -> List (Html msg) -> Html msg
-topAppBar config nodes =
+topAppBar : String -> TopAppBarConfig msg -> List (Html msg) -> Html msg
+topAppBar id config nodes =
     Html.node "mdc-top-app-bar"
         (List.filterMap identity
             [ rootCs
@@ -61,19 +61,19 @@ topAppBar config nodes =
         nodes
 
 
-shortTopAppBar : TopAppBarConfig msg -> List (Html msg) -> Html msg
-shortTopAppBar config nodes =
-    topAppBar { config | variant = Short } nodes
+shortTopAppBar : String -> TopAppBarConfig msg -> List (Html msg) -> Html msg
+shortTopAppBar id config nodes =
+    topAppBar id { config | variant = Short } nodes
 
 
-shortCollapsedTopAppBar : TopAppBarConfig msg -> List (Html msg) -> Html msg
-shortCollapsedTopAppBar config nodes =
-    topAppBar { config | variant = ShortCollapsed } nodes
+shortCollapsedTopAppBar : String -> TopAppBarConfig msg -> List (Html msg) -> Html msg
+shortCollapsedTopAppBar id config nodes =
+    topAppBar id { config | variant = ShortCollapsed } nodes
 
 
-prominentTopAppBar : TopAppBarConfig msg -> List (Html msg) -> Html msg
-prominentTopAppBar config nodes =
-    topAppBar { config | variant = Prominent } nodes
+prominentTopAppBar : String -> TopAppBarConfig msg -> List (Html msg) -> Html msg
+prominentTopAppBar id config nodes =
+    topAppBar id { config | variant = Prominent } nodes
 
 
 row : List (Html.Attribute msg) -> List (Html msg) -> Html msg

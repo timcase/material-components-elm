@@ -42,8 +42,8 @@ type Variant
     | Outlined
 
 
-textButton : ButtonConfig msg -> String -> Html msg
-textButton config label =
+textButton : String -> ButtonConfig msg -> String -> Html msg
+textButton id config label =
     Html.node "mdc-button"
         (List.filterMap identity
             [ rootCs
@@ -62,19 +62,19 @@ textButton config label =
         )
 
 
-raisedButton : ButtonConfig msg -> String -> Html msg
-raisedButton config label =
-    textButton { config | variant = Raised } label
+raisedButton : String -> ButtonConfig msg -> String -> Html msg
+raisedButton id config label =
+    textButton id { config | variant = Raised } label
 
 
-unelevatedButton : ButtonConfig msg -> String -> Html msg
-unelevatedButton config label =
-    textButton { config | variant = Unelevated } label
+unelevatedButton : String -> ButtonConfig msg -> String -> Html msg
+unelevatedButton id config label =
+    textButton id { config | variant = Unelevated } label
 
 
-outlinedButton : ButtonConfig msg -> String -> Html msg
-outlinedButton config label =
-    textButton { config | variant = Outlined } label
+outlinedButton : String -> ButtonConfig msg -> String -> Html msg
+outlinedButton id config label =
+    textButton id { config | variant = Outlined } label
 
 
 rootCs : Maybe (Html.Attribute msg)

@@ -23,8 +23,8 @@ switchConfig =
     }
 
 
-switch : SwitchConfig msg -> Html msg
-switch config =
+switch : String -> SwitchConfig msg -> Html msg
+switch id config =
     Html.node "mdc-switch"
         (List.filterMap identity
             [ rootCs

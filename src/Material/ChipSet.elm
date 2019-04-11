@@ -4,18 +4,18 @@ import Html exposing (Html, text)
 import Html.Attributes exposing (class)
 
 
-choiceChipSet : List (Html.Attribute msg) -> List (Html msg) -> Html msg
-choiceChipSet additionalAttributes chips =
+choiceChipSet : String -> List (Html.Attribute msg) -> List (Html msg) -> Html msg
+choiceChipSet id additionalAttributes chips =
     Html.node "mdc-chip-set" (rootCs :: choiceCs :: additionalAttributes) chips
 
 
-filterChipSet : List (Html.Attribute msg) -> List (Html msg) -> Html msg
-filterChipSet additionalAttributes chips =
+filterChipSet : String -> List (Html.Attribute msg) -> List (Html msg) -> Html msg
+filterChipSet id additionalAttributes chips =
     Html.node "mdc-chip-set" (rootCs :: filterCs :: additionalAttributes) chips
 
 
-inputChipSet : List (Html.Attribute msg) -> List (Html msg) -> Html msg
-inputChipSet additionalAttributes chips =
+inputChipSet : String -> List (Html.Attribute msg) -> List (Html msg) -> Html msg
+inputChipSet id additionalAttributes chips =
     Html.node "mdc-chip-set" (rootCs :: inputCs :: additionalAttributes) chips
 
 
