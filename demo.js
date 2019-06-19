@@ -2545,7 +2545,8 @@ var _VirtualDom_style = F2(function(key, value)
 		o: value
 	};
 });
-var _VirtualDom_property = F2(function(key, value)
+/* TODO: unused */
+var _VirtualDom_class = F2(function(key, value)
 {
 	return {
 		$: 'a2',
@@ -2553,7 +2554,7 @@ var _VirtualDom_property = F2(function(key, value)
 		o: value
 	};
 });
-var _VirtualDom_attribute = F2(function(key, value)
+var _VirtualDom_property = F2(function(key, value)
 {
 	return {
 		$: 'a3',
@@ -2561,10 +2562,18 @@ var _VirtualDom_attribute = F2(function(key, value)
 		o: value
 	};
 });
-var _VirtualDom_attributeNS = F3(function(namespace, key, value)
+var _VirtualDom_attribute = F2(function(key, value)
 {
 	return {
 		$: 'a4',
+		n: key,
+		o: value
+	};
+});
+var _VirtualDom_attributeNS = F3(function(namespace, key, value)
+{
+	return {
+		$: 'a5',
 		n: key,
 		o: { f: namespace, o: value }
 	};
@@ -2680,7 +2689,7 @@ function _VirtualDom_organizeFacts(factList)
 		var key = entry.n;
 		var value = entry.o;
 
-		if (tag === 'a2')
+		if (tag === 'a3')
 		{
 			(key === 'className')
 				? _VirtualDom_addClass(facts, key, _Json_unwrap(value))
@@ -2690,7 +2699,7 @@ function _VirtualDom_organizeFacts(factList)
 		}
 
 		var subFacts = facts[tag] || (facts[tag] = {});
-		(tag === 'a3' && key === 'class')
+		(tag === 'a4' && key === 'class')
 			? _VirtualDom_addClass(subFacts, key, value)
 			: subFacts[key] = value;
 	}
@@ -2701,7 +2710,8 @@ function _VirtualDom_organizeFacts(factList)
 function _VirtualDom_addClass(object, key, newClass)
 {
 	var classes = object[key];
-	object[key] = classes ? classes + ' ' + newClass : newClass;
+  object['a2'] = object['a2'] || {};
+	object['a2'][newClass] = newClass;
 }
 
 
@@ -2785,13 +2795,16 @@ function _VirtualDom_applyFacts(domNode, eventNode, facts)
 		key === 'a1'
 			? _VirtualDom_applyStyles(domNode, value)
 			:
+		key === 'a2'
+			? _VirtualDom_applyClasses(domNode, value)
+			:
 		key === 'a0'
 			? _VirtualDom_applyEvents(domNode, eventNode, value)
 			:
-		key === 'a3'
+		key === 'a4'
 			? _VirtualDom_applyAttrs(domNode, value)
 			:
-		key === 'a4'
+		key === 'a5'
 			? _VirtualDom_applyAttrsNS(domNode, value)
 			:
 		((key !== 'value' && key !== 'checked') || domNode[key] !== value) && (domNode[key] = value);
@@ -2810,6 +2823,25 @@ function _VirtualDom_applyStyles(domNode, styles)
 	for (var key in styles)
 	{
 		domNodeStyle[key] = styles[key];
+	}
+}
+
+
+
+// APPLY CLASSES
+
+
+function _VirtualDom_applyClasses(domNode, classes)
+{
+	var domNodeClassList = domNode.classList;
+
+	for (var key in classes)
+	{
+    if (classes[key] === '') {
+      domNodeClassList.remove(key);
+    } else {
+      domNodeClassList.add(key);
+    }
 	}
 }
 
@@ -3176,7 +3208,7 @@ function _VirtualDom_diffFacts(x, y, category)
 	// look for changes and removals
 	for (var xKey in x)
 	{
-		if (xKey === 'a1' || xKey === 'a0' || xKey === 'a3' || xKey === 'a4')
+		if (xKey === 'a1' || xKey === 'a2' || xKey === 'a0' || xKey === 'a4' || xKey === 'a5')
 		{
 			var subDiff = _VirtualDom_diffFacts(x[xKey], y[xKey] || {}, xKey);
 			if (subDiff)
@@ -3198,7 +3230,10 @@ function _VirtualDom_diffFacts(x, y, category)
 				(category === 'a1')
 					? ''
 					:
-				(category === 'a0' || category === 'a3')
+				(category === 'a2')
+					? ''
+					:
+				(category === 'a0' || category === 'a4')
 					? undefined
 					:
 				{ f: x[xKey].f, o: undefined };
@@ -9595,19 +9630,20 @@ var author$project$Material$Drawer$titleElt = function (_n0) {
 				elm$html$Html$text(title)
 			]));
 };
-var author$project$Material$Drawer$drawerHeader = function (config) {
-	return A2(
-		elm$html$Html$div,
-		A2(
-			elm$core$List$cons,
-			elm$html$Html$Attributes$class('mdc-drawer__header'),
-			config.h),
-		_List_fromArray(
-			[
-				author$project$Material$Drawer$titleElt(config),
-				author$project$Material$Drawer$subtitleElt(config)
-			]));
-};
+var author$project$Material$Drawer$drawerHeader = F2(
+	function (additionalAttributes, content) {
+		return A2(
+			elm$html$Html$div,
+			A2(
+				elm$core$List$cons,
+				elm$html$Html$Attributes$class('mdc-drawer__header'),
+				additionalAttributes),
+			_List_fromArray(
+				[
+					author$project$Material$Drawer$titleElt(content),
+					author$project$Material$Drawer$subtitleElt(content)
+				]));
+	});
 var author$project$Material$List$listGroupSubheaderCs = elm$html$Html$Attributes$class('mdc-list-group__subheader');
 var author$project$Material$List$listGroupSubheader = F2(
 	function (additionalAttributes, nodes) {
@@ -9662,8 +9698,10 @@ var author$project$Demo$DrawerPage$drawerBody = F2(
 		};
 		return _List_fromArray(
 			[
-				author$project$Material$Drawer$drawerHeader(
-				{h: _List_Nil, cM: 'email@material.io', cN: 'Mail'}),
+				A2(
+				author$project$Material$Drawer$drawerHeader,
+				_List_Nil,
+				{cM: 'email@material.io', cN: 'Mail'}),
 				A2(
 				author$project$Material$Drawer$drawerContent,
 				_List_Nil,
@@ -9848,8 +9886,10 @@ var author$project$Demo$Drawer$heroDrawer = _List_fromArray(
 		author$project$Material$Drawer$drawerConfig,
 		_List_fromArray(
 			[
-				author$project$Material$Drawer$drawerHeader(
-				{h: _List_Nil, cM: 'subtext', cN: 'Title'}),
+				A2(
+				author$project$Material$Drawer$drawerHeader,
+				_List_Nil,
+				{cM: 'subtext', cN: 'Title'}),
 				A2(
 				author$project$Material$Drawer$drawerContent,
 				_List_Nil,
@@ -15510,16 +15550,15 @@ var author$project$Material$TextField$labelElt = function (_n0) {
 				elm$html$Html$text(label)
 			]));
 };
-var elm$core$List$singleton = function (value) {
-	return _List_fromArray(
-		[value]);
-};
 var author$project$Material$TextField$leadingIconElt = function (_n0) {
 	var leadingIcon = _n0.aH;
-	return A2(
-		elm$core$Maybe$withDefault,
-		_List_Nil,
-		A2(elm$core$Maybe$map, elm$core$List$singleton, leadingIcon));
+	if (!leadingIcon.$) {
+		return _List_Nil;
+	} else {
+		var html = leadingIcon.a;
+		return _List_fromArray(
+			[html]);
+	}
 };
 var author$project$Material$TextField$lineRippleElt = A2(
 	elm$html$Html$div,
@@ -15582,10 +15621,13 @@ var author$project$Material$TextField$textareaCs = function (_n0) {
 };
 var author$project$Material$TextField$trailingIconElt = function (_n0) {
 	var trailingIcon = _n0.cP;
-	return A2(
-		elm$core$Maybe$withDefault,
-		_List_Nil,
-		A2(elm$core$Maybe$map, elm$core$List$singleton, trailingIcon));
+	if (!trailingIcon.$) {
+		return _List_Nil;
+	} else {
+		var html = trailingIcon.a;
+		return _List_fromArray(
+			[html]);
+	}
 };
 var author$project$Material$TextField$valueAttr = function (_n0) {
 	var value = _n0.l;
@@ -15594,14 +15636,15 @@ var author$project$Material$TextField$valueAttr = function (_n0) {
 		elm$html$Html$Attributes$attribute('value'),
 		value);
 };
+var author$project$Material$TextField$NoIcon = {$: 0};
 var author$project$Material$TextField$withLeadingIconCs = function (_n0) {
 	var leadingIcon = _n0.aH;
-	return (!_Utils_eq(leadingIcon, elm$core$Maybe$Nothing)) ? elm$core$Maybe$Just(
+	return (!_Utils_eq(leadingIcon, author$project$Material$TextField$NoIcon)) ? elm$core$Maybe$Just(
 		elm$html$Html$Attributes$class('mdc-text-field--with-leading-icon')) : elm$core$Maybe$Nothing;
 };
 var author$project$Material$TextField$withTrailingIconCs = function (_n0) {
 	var trailingIcon = _n0.cP;
-	return (!_Utils_eq(trailingIcon, elm$core$Maybe$Nothing)) ? elm$core$Maybe$Just(
+	return (!_Utils_eq(trailingIcon, author$project$Material$TextField$NoIcon)) ? elm$core$Maybe$Just(
 		elm$html$Html$Attributes$class('mdc-text-field--with-trailing-icon')) : elm$core$Maybe$Nothing;
 };
 var author$project$Material$TextField$textField = function (config) {
@@ -15649,10 +15692,13 @@ var author$project$Material$TextField$textField = function (config) {
 					author$project$Material$TextField$trailingIconElt(config)
 				])));
 };
-var author$project$Material$TextField$textFieldConfig = {h: _List_Nil, aW: elm$core$Maybe$Nothing, aY: false, bv: false, a1: false, b: '', aH: elm$core$Maybe$Nothing, a2: elm$core$Maybe$Nothing, a3: elm$core$Maybe$Nothing, a5: elm$core$Maybe$Nothing, a6: elm$core$Maybe$Nothing, cw: elm$core$Maybe$Nothing, bF: elm$core$Maybe$Nothing, k: false, cC: elm$core$Maybe$Nothing, be: false, bf: elm$core$Maybe$Nothing, bW: false, cP: elm$core$Maybe$Nothing, l: elm$core$Maybe$Nothing};
+var author$project$Material$TextField$textFieldConfig = {h: _List_Nil, aW: elm$core$Maybe$Nothing, aY: false, bv: false, a1: false, b: '', aH: author$project$Material$TextField$NoIcon, a2: elm$core$Maybe$Nothing, a3: elm$core$Maybe$Nothing, a5: elm$core$Maybe$Nothing, a6: elm$core$Maybe$Nothing, cw: elm$core$Maybe$Nothing, bF: elm$core$Maybe$Nothing, k: false, cC: elm$core$Maybe$Nothing, be: false, bf: elm$core$Maybe$Nothing, bW: false, cP: author$project$Material$TextField$NoIcon, l: elm$core$Maybe$Nothing};
+var author$project$Material$TextField$Icon = function (a) {
+	return {$: 1, a: a};
+};
 var author$project$Material$TextField$textFieldIcon = F2(
 	function (iconConfig, iconName) {
-		return elm$core$Maybe$Just(
+		return author$project$Material$TextField$Icon(
 			A2(
 				author$project$Material$Icon$icon,
 				_Utils_update(
