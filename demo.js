@@ -2710,8 +2710,12 @@ function _VirtualDom_organizeFacts(factList)
 function _VirtualDom_addClass(object, key, newClass)
 {
 	var classes = object[key];
-  object['a2'] = object['a2'] || {};
-	object['a2'][newClass] = newClass;
+  var newClasses = newClass.split(" ");
+  for (var cs of newClasses) {
+    if (cs === "") continue;
+    object['a2'] = object['a2'] || {};
+    object['a2'][cs] = cs;
+  }
 }
 
 
@@ -2842,7 +2846,7 @@ function _VirtualDom_applyClasses(domNode, classes)
     } else {
       domNodeClassList.add(key);
     }
-	}
+  }
 }
 
 
