@@ -2545,8 +2545,7 @@ var _VirtualDom_style = F2(function(key, value)
 		o: value
 	};
 });
-/* TODO: unused */
-var _VirtualDom_class = F2(function(key, value)
+var _VirtualDom_property = F2(function(key, value)
 {
 	return {
 		$: 'a2',
@@ -2554,7 +2553,7 @@ var _VirtualDom_class = F2(function(key, value)
 		o: value
 	};
 });
-var _VirtualDom_property = F2(function(key, value)
+var _VirtualDom_attribute = F2(function(key, value)
 {
 	return {
 		$: 'a3',
@@ -2562,18 +2561,10 @@ var _VirtualDom_property = F2(function(key, value)
 		o: value
 	};
 });
-var _VirtualDom_attribute = F2(function(key, value)
-{
-	return {
-		$: 'a4',
-		n: key,
-		o: value
-	};
-});
 var _VirtualDom_attributeNS = F3(function(namespace, key, value)
 {
 	return {
-		$: 'a5',
+		$: 'a4',
 		n: key,
 		o: { f: namespace, o: value }
 	};
@@ -2689,7 +2680,7 @@ function _VirtualDom_organizeFacts(factList)
 		var key = entry.n;
 		var value = entry.o;
 
-		if (tag === 'a3')
+		if (tag === 'a2')
 		{
 			(key === 'className')
 				? _VirtualDom_addClass(facts, key, _Json_unwrap(value))
@@ -2699,7 +2690,7 @@ function _VirtualDom_organizeFacts(factList)
 		}
 
 		var subFacts = facts[tag] || (facts[tag] = {});
-		(tag === 'a4' && key === 'class')
+		(tag === 'a3' && key === 'class')
 			? _VirtualDom_addClass(subFacts, key, value)
 			: subFacts[key] = value;
 	}
@@ -2710,12 +2701,7 @@ function _VirtualDom_organizeFacts(factList)
 function _VirtualDom_addClass(object, key, newClass)
 {
 	var classes = object[key];
-  var newClasses = newClass.split(" ");
-  for (var cs of newClasses) {
-    if (cs === "") continue;
-    object['a2'] = object['a2'] || {};
-    object['a2'][cs] = cs;
-  }
+	object[key] = classes ? classes + ' ' + newClass : newClass;
 }
 
 
@@ -2799,16 +2785,13 @@ function _VirtualDom_applyFacts(domNode, eventNode, facts)
 		key === 'a1'
 			? _VirtualDom_applyStyles(domNode, value)
 			:
-		key === 'a2'
-			? _VirtualDom_applyClasses(domNode, value)
-			:
 		key === 'a0'
 			? _VirtualDom_applyEvents(domNode, eventNode, value)
 			:
-		key === 'a4'
+		key === 'a3'
 			? _VirtualDom_applyAttrs(domNode, value)
 			:
-		key === 'a5'
+		key === 'a4'
 			? _VirtualDom_applyAttrsNS(domNode, value)
 			:
 		((key !== 'value' && key !== 'checked') || domNode[key] !== value) && (domNode[key] = value);
@@ -2828,25 +2811,6 @@ function _VirtualDom_applyStyles(domNode, styles)
 	{
 		domNodeStyle[key] = styles[key];
 	}
-}
-
-
-
-// APPLY CLASSES
-
-
-function _VirtualDom_applyClasses(domNode, classes)
-{
-	var domNodeClassList = domNode.classList;
-
-	for (var key in classes)
-	{
-    if (classes[key] === '') {
-      domNodeClassList.remove(key);
-    } else {
-      domNodeClassList.add(key);
-    }
-  }
 }
 
 
@@ -3212,7 +3176,7 @@ function _VirtualDom_diffFacts(x, y, category)
 	// look for changes and removals
 	for (var xKey in x)
 	{
-		if (xKey === 'a1' || xKey === 'a2' || xKey === 'a0' || xKey === 'a4' || xKey === 'a5')
+		if (xKey === 'a1' || xKey === 'a0' || xKey === 'a3' || xKey === 'a4')
 		{
 			var subDiff = _VirtualDom_diffFacts(x[xKey], y[xKey] || {}, xKey);
 			if (subDiff)
@@ -3234,10 +3198,7 @@ function _VirtualDom_diffFacts(x, y, category)
 				(category === 'a1')
 					? ''
 					:
-				(category === 'a2')
-					? ''
-					:
-				(category === 'a0' || category === 'a4')
+				(category === 'a0' || category === 'a3')
 					? undefined
 					:
 				{ f: x[xKey].f, o: undefined };
