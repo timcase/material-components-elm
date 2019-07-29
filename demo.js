@@ -4192,7 +4192,7 @@ function _Browser_getViewport()
 			aP: _Browser_window.pageXOffset,
 			aQ: _Browser_window.pageYOffset,
 			bZ: _Browser_doc.documentElement.clientWidth,
-			D: _Browser_doc.documentElement.clientHeight
+			E: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4203,7 +4203,7 @@ function _Browser_getScene()
 	var elem = _Browser_doc.documentElement;
 	return {
 		bZ: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		D: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		E: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4228,13 +4228,13 @@ function _Browser_getViewportOf(id)
 		return {
 			bS: {
 				bZ: node.scrollWidth,
-				D: node.scrollHeight
+				E: node.scrollHeight
 			},
 			bY: {
 				aP: node.scrollLeft,
 				aQ: node.scrollTop,
 				bZ: node.clientWidth,
-				D: node.clientHeight
+				E: node.clientHeight
 			}
 		};
 	});
@@ -4269,13 +4269,13 @@ function _Browser_getElement(id)
 				aP: x,
 				aQ: y,
 				bZ: _Browser_doc.documentElement.clientWidth,
-				D: _Browser_doc.documentElement.clientHeight
+				E: _Browser_doc.documentElement.clientHeight
 			},
 			cc: {
 				aP: x + rect.left,
 				aQ: y + rect.top,
 				bZ: rect.width,
-				D: rect.height
+				E: rect.height
 			}
 		};
 	});
@@ -4752,7 +4752,7 @@ var author$project$Demo$Switch$defaultModel = {
 				_Utils_Tuple2('hero-switch', true)
 			]))
 };
-var author$project$Demo$TabBar$defaultModel = {B: 0, aC: 0, aD: 0, aE: 0};
+var author$project$Demo$TabBar$defaultModel = {C: 0, aC: 0, aD: 0, aE: 0};
 var author$project$Demo$TextFields$defaultModel = {l: ''};
 var author$project$Demo$Theme$defaultModel = {};
 var author$project$Demo$TopAppBar$defaultModel = {};
@@ -6115,7 +6115,7 @@ var author$project$Demo$TabBar$update = F2(
 				var index = msg.a;
 				return _Utils_update(
 					model,
-					{B: index});
+					{C: index});
 			case 1:
 				var index = msg.a;
 				return _Utils_update(
@@ -6764,8 +6764,7 @@ var author$project$Demo$Buttons$heroMargin = _List_fromArray(
 	[
 		A2(elm$html$Html$Attributes$style, 'margin', '16px 32px')
 	]);
-var author$project$Material$Button$Text = 0;
-var author$project$Material$Button$buttonConfig = {h: _List_Nil, b8: false, aY: false, cm: elm$core$Maybe$Nothing, bE: elm$core$Maybe$Nothing, cP: false, H: 0};
+var author$project$Material$Button$buttonConfig = {h: _List_Nil, b8: false, aY: false, cm: elm$core$Maybe$Nothing, bE: elm$core$Maybe$Nothing, cP: false};
 var author$project$Material$Button$Outlined = 3;
 var elm$core$Maybe$map = F2(
 	function (f, maybe) {
@@ -6878,8 +6877,7 @@ var author$project$Material$Button$rootCs = elm$core$Maybe$Just(
 var author$project$Material$Button$trailingIconElt = function (config) {
 	return config.cP ? author$project$Material$Button$iconElt(config) : elm$core$Maybe$Nothing;
 };
-var author$project$Material$Button$variantCs = function (_n0) {
-	var variant = _n0.H;
+var author$project$Material$Button$variantCs = function (variant) {
 	switch (variant) {
 		case 0:
 			return elm$core$Maybe$Nothing;
@@ -6917,8 +6915,8 @@ var elm$virtual_dom$VirtualDom$node = function (tag) {
 		_VirtualDom_noScript(tag));
 };
 var elm$html$Html$node = elm$virtual_dom$VirtualDom$node;
-var author$project$Material$Button$textButton = F2(
-	function (config, label) {
+var author$project$Material$Button$button = F3(
+	function (variant, config, label) {
 		return A3(
 			elm$html$Html$node,
 			'mdc-button',
@@ -6929,7 +6927,7 @@ var author$project$Material$Button$textButton = F2(
 					_List_fromArray(
 						[
 							author$project$Material$Button$rootCs,
-							author$project$Material$Button$variantCs(config),
+							author$project$Material$Button$variantCs(variant),
 							author$project$Material$Button$denseCs(config),
 							author$project$Material$Button$disabledAttr(config),
 							author$project$Material$Button$clickHandler(config)
@@ -6947,32 +6945,22 @@ var author$project$Material$Button$textButton = F2(
 	});
 var author$project$Material$Button$outlinedButton = F2(
 	function (config, label) {
-		return A2(
-			author$project$Material$Button$textButton,
-			_Utils_update(
-				config,
-				{H: 3}),
-			label);
+		return A3(author$project$Material$Button$button, 3, config, label);
 	});
 var author$project$Material$Button$Raised = 1;
 var author$project$Material$Button$raisedButton = F2(
 	function (config, label) {
-		return A2(
-			author$project$Material$Button$textButton,
-			_Utils_update(
-				config,
-				{H: 1}),
-			label);
+		return A3(author$project$Material$Button$button, 1, config, label);
+	});
+var author$project$Material$Button$Text = 0;
+var author$project$Material$Button$textButton = F2(
+	function (config, label) {
+		return A3(author$project$Material$Button$button, 0, config, label);
 	});
 var author$project$Material$Button$Unelevated = 2;
 var author$project$Material$Button$unelevatedButton = F2(
 	function (config, label) {
-		return A2(
-			author$project$Material$Button$textButton,
-			_Utils_update(
-				config,
-				{H: 2}),
-			label);
+		return A3(author$project$Material$Button$button, 2, config, label);
 	});
 var author$project$Demo$Buttons$heroButtons = _List_fromArray(
 	[
@@ -7840,7 +7828,7 @@ var author$project$Material$Drawer$closeHandler = function (_n0) {
 };
 var author$project$Material$Drawer$Permanent = 0;
 var author$project$Material$Drawer$openAttr = function (_n0) {
-	var variant = _n0.H;
+	var variant = _n0.z;
 	var open = _n0.cA;
 	return (open && variant) ? elm$core$Maybe$Just(
 		A2(elm$html$Html$Attributes$attribute, 'open', '')) : elm$core$Maybe$Nothing;
@@ -7848,7 +7836,7 @@ var author$project$Material$Drawer$openAttr = function (_n0) {
 var author$project$Material$Drawer$rootCs = elm$core$Maybe$Just(
 	elm$html$Html$Attributes$class('mdc-drawer'));
 var author$project$Material$Drawer$variantCs = function (_n0) {
-	var variant = _n0.H;
+	var variant = _n0.z;
 	switch (variant) {
 		case 0:
 			return elm$core$Maybe$Nothing;
@@ -7885,10 +7873,10 @@ var author$project$Material$Drawer$dismissibleDrawer = F2(
 			author$project$Material$Drawer$drawer,
 			_Utils_update(
 				config,
-				{H: 1}),
+				{z: 1}),
 			nodes);
 	});
-var author$project$Material$Drawer$drawerConfig = {h: _List_Nil, aJ: elm$core$Maybe$Nothing, cA: false, H: 0};
+var author$project$Material$Drawer$drawerConfig = {h: _List_Nil, aJ: elm$core$Maybe$Nothing, cA: false, z: 0};
 var author$project$Material$Drawer$drawerContent = F2(
 	function (attributes, nodes) {
 		return A2(
@@ -7936,7 +7924,7 @@ var author$project$Material$IconButton$iconButton = F2(
 					elm$html$Html$text(iconName)
 				]));
 	});
-var author$project$Material$IconButton$iconButtonConfig = {h: _List_Nil, b: elm$core$Maybe$Nothing, aI: false, bE: elm$core$Maybe$Nothing};
+var author$project$Material$IconButton$iconButtonConfig = {h: _List_Nil, aY: false, b: elm$core$Maybe$Nothing, aI: false, bE: elm$core$Maybe$Nothing};
 var author$project$Material$TopAppBar$alignStart = elm$html$Html$Attributes$class('mdc-top-app-bar__section--align-start');
 var author$project$Material$TopAppBar$fixedAdjust = elm$html$Html$Attributes$class('mdc-top-app-bar--fixed-adjust');
 var author$project$Material$TopAppBar$navigationIcon = elm$html$Html$Attributes$class('mdc-top-app-bar__navigation-icon');
@@ -7979,7 +7967,7 @@ var author$project$Material$TopAppBar$fixedCs = function (_n0) {
 var author$project$Material$TopAppBar$rootCs = elm$core$Maybe$Just(
 	elm$html$Html$Attributes$class('mdc-top-app-bar'));
 var author$project$Material$TopAppBar$variantCs = function (_n0) {
-	var variant = _n0.H;
+	var variant = _n0.z;
 	switch (variant) {
 		case 0:
 			return elm$core$Maybe$Nothing;
@@ -8014,7 +8002,7 @@ var author$project$Material$TopAppBar$topAppBar = F2(
 			nodes);
 	});
 var author$project$Material$TopAppBar$Default = 0;
-var author$project$Material$TopAppBar$topAppBarConfig = {h: _List_Nil, b8: false, ce: false, H: 0};
+var author$project$Material$TopAppBar$topAppBarConfig = {h: _List_Nil, b8: false, ce: false, z: 0};
 var author$project$Material$Typography$body1 = elm$html$Html$Attributes$class('mdc-typography--body1');
 var author$project$Material$Typography$headline5 = elm$html$Html$Attributes$class('mdc-typography--headline5');
 var elm$html$Html$h1 = _VirtualDom_node('h1');
@@ -9835,7 +9823,7 @@ var author$project$Material$Drawer$permanentDrawer = F2(
 			author$project$Material$Drawer$drawer,
 			_Utils_update(
 				config,
-				{H: 0}),
+				{z: 0}),
 			nodes);
 	});
 var elm$html$Html$Attributes$href = function (url) {
@@ -10219,6 +10207,28 @@ var author$project$Demo$Elevation$heroElevation = _List_fromArray(
 				elm$html$Html$text('Raised 16dp')
 			]))
 	]);
+var author$project$Material$Elevation$z1 = author$project$Material$Elevation$z(1);
+var author$project$Material$Elevation$z10 = author$project$Material$Elevation$z(10);
+var author$project$Material$Elevation$z11 = author$project$Material$Elevation$z(11);
+var author$project$Material$Elevation$z12 = author$project$Material$Elevation$z(12);
+var author$project$Material$Elevation$z13 = author$project$Material$Elevation$z(13);
+var author$project$Material$Elevation$z14 = author$project$Material$Elevation$z(14);
+var author$project$Material$Elevation$z15 = author$project$Material$Elevation$z(15);
+var author$project$Material$Elevation$z17 = author$project$Material$Elevation$z(17);
+var author$project$Material$Elevation$z18 = author$project$Material$Elevation$z(18);
+var author$project$Material$Elevation$z19 = author$project$Material$Elevation$z(19);
+var author$project$Material$Elevation$z2 = author$project$Material$Elevation$z(2);
+var author$project$Material$Elevation$z20 = author$project$Material$Elevation$z(20);
+var author$project$Material$Elevation$z21 = author$project$Material$Elevation$z(21);
+var author$project$Material$Elevation$z22 = author$project$Material$Elevation$z(22);
+var author$project$Material$Elevation$z23 = author$project$Material$Elevation$z(23);
+var author$project$Material$Elevation$z24 = author$project$Material$Elevation$z(24);
+var author$project$Material$Elevation$z3 = author$project$Material$Elevation$z(3);
+var author$project$Material$Elevation$z4 = author$project$Material$Elevation$z(4);
+var author$project$Material$Elevation$z5 = author$project$Material$Elevation$z(5);
+var author$project$Material$Elevation$z6 = author$project$Material$Elevation$z(6);
+var author$project$Material$Elevation$z7 = author$project$Material$Elevation$z(7);
+var author$project$Material$Elevation$z9 = author$project$Material$Elevation$z(9);
 var author$project$Demo$Elevation$view = function (model) {
 	return {
 		b7: _List_fromArray(
@@ -10226,22 +10236,184 @@ var author$project$Demo$Elevation$view = function (model) {
 				A2(
 				elm$html$Html$div,
 				author$project$Demo$Elevation$demoContainer,
-				A2(
-					elm$core$List$map,
-					function (z) {
-						return A2(
-							elm$html$Html$div,
-							A2(
-								elm$core$List$cons,
-								author$project$Material$Elevation$z(z),
-								author$project$Demo$Elevation$demoSurface),
-							_List_fromArray(
-								[
-									elm$html$Html$text(
-									elm$core$String$fromInt(z) + 'dp')
-								]));
-					},
-					A2(elm$core$List$range, 0, 24)))
+				_List_fromArray(
+					[
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z0, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('0dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z1, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('1dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z2, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('2dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z3, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('3dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z4, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('4dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z5, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('5dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z6, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('6dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z7, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('7dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z8, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('8dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z9, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('9dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z10, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('10dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z11, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('11dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z12, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('12dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z13, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('13dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z14, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('14dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z15, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('15dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z16, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('16dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z17, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('17dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z18, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('18dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z19, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('19dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z20, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('20dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z21, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('21dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z22, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('22dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z23, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('23dp')
+							])),
+						A2(
+						elm$html$Html$div,
+						A2(elm$core$List$cons, author$project$Material$Elevation$z24, author$project$Demo$Elevation$demoSurface),
+						_List_fromArray(
+							[
+								elm$html$Html$text('24dp')
+							]))
+					]))
 			]),
 		cj: author$project$Demo$Elevation$heroElevation,
 		cD: 'Elevation is the relative depth, or distance, between two surfaces along the z-axis.',
@@ -10625,6 +10797,11 @@ var author$project$Material$IconButton$ariaPressedAttr = function (_n0) {
 			'aria-pressed',
 			on ? 'true' : 'false'));
 };
+var author$project$Material$IconButton$disabledAttr = function (_n0) {
+	var disabled = _n0.aY;
+	return elm$core$Maybe$Just(
+		elm$html$Html$Attributes$disabled(disabled));
+};
 var author$project$Material$IconButton$iconCs = elm$core$Maybe$Just(
 	elm$html$Html$Attributes$class('mdc-icon-button__icon'));
 var author$project$Material$IconButton$onAttr = function (_n0) {
@@ -10653,7 +10830,8 @@ var author$project$Material$IconButton$iconToggle = F2(
 							author$project$Material$IconButton$ariaPressedAttr(config),
 							author$project$Material$IconButton$ariaLabelAttr(config),
 							author$project$Material$IconButton$tabIndexAttr,
-							author$project$Material$IconButton$clickHandler(config)
+							author$project$Material$IconButton$clickHandler(config),
+							author$project$Material$IconButton$disabledAttr(config)
 						])),
 				config.h),
 			_List_fromArray(
@@ -11262,7 +11440,7 @@ var author$project$Material$LinearProgress$Buffered = F2(
 	});
 var elm$core$String$fromFloat = _String_fromNumber;
 var author$project$Material$LinearProgress$bufferAttr = function (_n0) {
-	var variant = _n0.H;
+	var variant = _n0.z;
 	if (variant.$ === 2) {
 		var buffer = variant.b;
 		return elm$core$Maybe$Just(
@@ -11295,7 +11473,7 @@ var author$project$Material$LinearProgress$closedAttr = function (_n0) {
 };
 var author$project$Material$LinearProgress$Indeterminate = {$: 0};
 var author$project$Material$LinearProgress$determinateAttr = function (_n0) {
-	var variant = _n0.H;
+	var variant = _n0.z;
 	return (!_Utils_eq(variant, author$project$Material$LinearProgress$Indeterminate)) ? elm$core$Maybe$Just(
 		A2(elm$html$Html$Attributes$attribute, 'determinate', '')) : elm$core$Maybe$Nothing;
 };
@@ -11317,7 +11495,7 @@ var author$project$Material$LinearProgress$primaryBarElt = A2(
 	_List_fromArray(
 		[author$project$Material$LinearProgress$barInnerElt]));
 var author$project$Material$LinearProgress$progressAttr = function (_n0) {
-	var variant = _n0.H;
+	var variant = _n0.z;
 	switch (variant.$) {
 		case 1:
 			var progress = variant.a;
@@ -11355,7 +11533,7 @@ var author$project$Material$LinearProgress$secondaryBarElt = A2(
 	_List_fromArray(
 		[author$project$Material$LinearProgress$barInnerElt]));
 var author$project$Material$LinearProgress$variantCs = function (_n0) {
-	var variant = _n0.H;
+	var variant = _n0.z;
 	if (!variant.$) {
 		return elm$core$Maybe$Just(
 			elm$html$Html$Attributes$class('mdc-linear-progress--indeterminate'));
@@ -11395,7 +11573,7 @@ var author$project$Material$LinearProgress$bufferedLinearProgress = F2(
 			_Utils_update(
 				config,
 				{
-					H: A2(author$project$Material$LinearProgress$Buffered, progress, buffered)
+					z: A2(author$project$Material$LinearProgress$Buffered, progress, buffered)
 				}));
 	});
 var author$project$Material$LinearProgress$Determinate = function (a) {
@@ -11408,16 +11586,16 @@ var author$project$Material$LinearProgress$determinateLinearProgress = F2(
 			_Utils_update(
 				config,
 				{
-					H: author$project$Material$LinearProgress$Determinate(progress)
+					z: author$project$Material$LinearProgress$Determinate(progress)
 				}));
 	});
 var author$project$Material$LinearProgress$indeterminateLinearProgress = function (config) {
 	return author$project$Material$LinearProgress$linearProgress(
 		_Utils_update(
 			config,
-			{H: author$project$Material$LinearProgress$Indeterminate}));
+			{z: author$project$Material$LinearProgress$Indeterminate}));
 };
-var author$project$Material$LinearProgress$linearProgressConfig = {h: _List_Nil, aV: false, bR: false, H: author$project$Material$LinearProgress$Indeterminate};
+var author$project$Material$LinearProgress$linearProgressConfig = {h: _List_Nil, aV: false, bR: false, z: author$project$Material$LinearProgress$Indeterminate};
 var author$project$Demo$LinearProgress$view = function (model) {
 	return {
 		b7: _List_fromArray(
@@ -12514,7 +12692,7 @@ var author$project$Material$Drawer$modalDrawer = F2(
 			author$project$Material$Drawer$drawer,
 			_Utils_update(
 				config,
-				{H: 2}),
+				{z: 2}),
 			nodes);
 	});
 var author$project$Demo$ModalDrawer$view = function (model) {
@@ -12554,7 +12732,7 @@ var author$project$Material$TopAppBar$prominentTopAppBar = F2(
 			author$project$Material$TopAppBar$topAppBar,
 			_Utils_update(
 				config,
-				{H: 3}),
+				{z: 3}),
 			nodes);
 	});
 var author$project$Demo$ProminentTopAppBar$view = function (model) {
@@ -12793,7 +12971,6 @@ var author$project$Demo$RadioButtons$view = function (model) {
 		cN: 'Radio Button'
 	};
 };
-var author$project$Material$Elevation$z2 = author$project$Material$Elevation$z(2);
 var author$project$Demo$Ripple$demoBox = _List_fromArray(
 	[
 		A2(elm$html$Html$Attributes$style, 'display', 'flex'),
@@ -12981,7 +13158,7 @@ var author$project$Demo$Selects$SetEnhancedValue = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$Material$Select$Enhanced$Filled = 0;
-var author$project$Material$Select$Enhanced$enhancedSelectConfig = {h: _List_Nil, aY: false, b: '', H: 0, bZ: elm$core$Maybe$Nothing};
+var author$project$Material$Select$Enhanced$enhancedSelectConfig = {h: _List_Nil, aY: false, b: '', z: 0, bZ: elm$core$Maybe$Nothing};
 var author$project$Material$Select$Enhanced$Outlined = 1;
 var author$project$Material$Select$Enhanced$disabledCs = function (_n0) {
 	var disabled = _n0.aY;
@@ -13092,7 +13269,7 @@ var author$project$Material$Select$Enhanced$selectedTextElt = A2(
 		]),
 	_List_Nil);
 var author$project$Material$Select$Enhanced$variantCs = function (_n0) {
-	var variant = _n0.H;
+	var variant = _n0.z;
 	return (variant === 1) ? elm$core$Maybe$Just(
 		elm$html$Html$Attributes$class('mdc-select--outlined')) : elm$core$Maybe$Nothing;
 };
@@ -13122,7 +13299,7 @@ var author$project$Material$Select$Enhanced$enhancedSelect = F2(
 							author$project$Material$Select$Enhanced$selectedTextElt,
 							author$project$Material$Select$Enhanced$menuElt(nodes)
 						]),
-						(config.H === 1) ? _List_fromArray(
+						(config.z === 1) ? _List_fromArray(
 						[
 							author$project$Material$Select$Enhanced$notchedOutlineElt(config)
 						]) : _List_fromArray(
@@ -13138,7 +13315,7 @@ var author$project$Material$Select$Enhanced$filledEnhancedSelect = F2(
 			author$project$Material$Select$Enhanced$enhancedSelect,
 			_Utils_update(
 				config,
-				{H: 0}),
+				{z: 0}),
 			nodes);
 	});
 var author$project$Material$Select$Enhanced$listItemActivatedCs = function (_n0) {
@@ -13463,7 +13640,7 @@ var author$project$Material$Select$notchedOutlineElt = function (_n0) {
 var author$project$Material$Select$rootCs = elm$core$Maybe$Just(
 	elm$html$Html$Attributes$class('mdc-select'));
 var author$project$Material$Select$variantCs = function (_n0) {
-	var variant = _n0.H;
+	var variant = _n0.z;
 	return (variant === 1) ? elm$core$Maybe$Just(
 		elm$html$Html$Attributes$class('mdc-select--outlined')) : elm$core$Maybe$Nothing;
 };
@@ -13490,7 +13667,7 @@ var author$project$Material$Select$select = F2(
 							author$project$Material$Select$dropdownIconElt,
 							A2(author$project$Material$Select$nativeControlElt, config, nodes)
 						]),
-						(config.H === 1) ? _List_fromArray(
+						(config.z === 1) ? _List_fromArray(
 						[
 							author$project$Material$Select$notchedOutlineElt(config)
 						]) : _List_fromArray(
@@ -13506,10 +13683,10 @@ var author$project$Material$Select$filledSelect = F2(
 			author$project$Material$Select$select,
 			_Utils_update(
 				config,
-				{H: 0}),
+				{z: 0}),
 			nodes);
 	});
-var author$project$Material$Select$selectConfig = {h: _List_Nil, b: '', cw: elm$core$Maybe$Nothing, l: elm$core$Maybe$Nothing, H: 0};
+var author$project$Material$Select$selectConfig = {h: _List_Nil, b: '', cw: elm$core$Maybe$Nothing, l: elm$core$Maybe$Nothing, z: 0};
 var author$project$Demo$Selects$filledSelects = function (model) {
 	return A2(
 		elm$html$Html$div,
@@ -13553,7 +13730,7 @@ var author$project$Material$Select$outlinedSelect = F2(
 			author$project$Material$Select$select,
 			_Utils_update(
 				config,
-				{H: 1}),
+				{z: 1}),
 			nodes);
 	});
 var author$project$Demo$Selects$outlinedSelects = function (model) {
@@ -13675,7 +13852,7 @@ var author$project$Material$TopAppBar$shortCollapsedTopAppBar = F2(
 			author$project$Material$TopAppBar$topAppBar,
 			_Utils_update(
 				config,
-				{H: 2}),
+				{z: 2}),
 			nodes);
 	});
 var author$project$Material$TopAppBar$shortFixedAdjust = elm$html$Html$Attributes$class('mdc-top-app-bar--short-fixed-adjust');
@@ -13735,7 +13912,7 @@ var author$project$Material$TopAppBar$shortTopAppBar = F2(
 			author$project$Material$TopAppBar$topAppBar,
 			_Utils_update(
 				config,
-				{H: 1}),
+				{z: 1}),
 			nodes);
 	});
 var author$project$Demo$ShortTopAppBar$view = function (model) {
@@ -14860,7 +15037,7 @@ var author$project$Material$TabBar$activeTabAttr = function (tabs) {
 					elm$core$List$filter,
 					function (_n0) {
 						var config = _n0.b.aX;
-						return config.A;
+						return config.B;
 					},
 					A2(elm$core$List$indexedMap, elm$core$Tuple$pair, tabs)))));
 	return A2(
@@ -15099,7 +15276,7 @@ var author$project$Material$TabBar$tabBar = F2(
 	});
 var author$project$Material$TabBar$tabScrollerConfig = {h: _List_Nil, aT: elm$core$Maybe$Nothing};
 var author$project$Material$TabBar$tabBarConfig = {h: _List_Nil, bj: author$project$Material$TabBar$tabScrollerConfig};
-var author$project$Material$TabBar$tabConfig = {A: false, h: _List_Nil, cp: false, a7: false, bE: elm$core$Maybe$Nothing, cJ: false};
+var author$project$Material$TabBar$tabConfig = {B: false, h: _List_Nil, cp: false, a7: false, bE: elm$core$Maybe$Nothing, cJ: false};
 var author$project$Demo$TabBar$heroTabs = F2(
 	function (model, index) {
 		return A2(
@@ -15112,7 +15289,7 @@ var author$project$Demo$TabBar$heroTabs = F2(
 					_Utils_update(
 						author$project$Material$TabBar$tabConfig,
 						{
-							A: !model.B,
+							B: !model.C,
 							bE: elm$core$Maybe$Just(
 								author$project$Demo$TabBar$SetActiveHeroTab(0))
 						}),
@@ -15122,7 +15299,7 @@ var author$project$Demo$TabBar$heroTabs = F2(
 					_Utils_update(
 						author$project$Material$TabBar$tabConfig,
 						{
-							A: model.B === 1,
+							B: model.C === 1,
 							bE: elm$core$Maybe$Just(
 								author$project$Demo$TabBar$SetActiveHeroTab(1))
 						}),
@@ -15132,7 +15309,7 @@ var author$project$Demo$TabBar$heroTabs = F2(
 					_Utils_update(
 						author$project$Material$TabBar$tabConfig,
 						{
-							A: model.B === 2,
+							B: model.C === 2,
 							bE: elm$core$Maybe$Just(
 								author$project$Demo$TabBar$SetActiveHeroTab(2))
 						}),
@@ -15147,7 +15324,7 @@ var author$project$Demo$TabBar$scrollingTabs = function (model) {
 		return _Utils_update(
 			author$project$Material$TabBar$tabConfig,
 			{
-				A: _Utils_eq(model.aD, index),
+				B: _Utils_eq(model.aD, index),
 				bE: elm$core$Maybe$Just(
 					author$project$Demo$TabBar$SetActiveScrollingTab(index))
 			});
@@ -15175,7 +15352,7 @@ var author$project$Demo$TabBar$tabsWithIcons = function (model) {
 		return _Utils_update(
 			author$project$Material$TabBar$tabConfig,
 			{
-				A: _Utils_eq(model.aC, index),
+				B: _Utils_eq(model.aC, index),
 				bE: elm$core$Maybe$Just(
 					author$project$Demo$TabBar$SetActiveIconTab(index))
 			});
@@ -15216,7 +15393,7 @@ var author$project$Demo$TabBar$tabsWithStackedIcons = function (model) {
 		return _Utils_update(
 			author$project$Material$TabBar$tabConfig,
 			{
-				A: _Utils_eq(model.aE, index),
+				B: _Utils_eq(model.aE, index),
 				cp: true,
 				bE: elm$core$Maybe$Just(
 					author$project$Demo$TabBar$SetActiveStackedTab(index)),
