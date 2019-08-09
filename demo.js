@@ -15115,8 +15115,8 @@ var author$project$Material$TabBar$tabTextLabelElt = function (_n0) {
 					elm$html$Html$text(label)
 				])));
 };
-var author$project$Material$TabBar$tabContentElt = F2(
-	function (config, content) {
+var author$project$Material$TabBar$tabContentElt = F3(
+	function (barConfig, config, content) {
 		return elm$core$Maybe$Just(
 			A2(
 				elm$html$Html$div,
@@ -15124,7 +15124,7 @@ var author$project$Material$TabBar$tabContentElt = F2(
 					[
 						elm$html$Html$Attributes$class('mdc-tab__content')
 					]),
-				config.cr ? A2(
+				barConfig.cr ? A2(
 					elm$core$List$filterMap,
 					elm$core$Basics$identity,
 					_List_fromArray(
@@ -15163,61 +15163,67 @@ var author$project$Material$TabBar$tabStackedCs = function (_n0) {
 	return stacked ? elm$core$Maybe$Just(
 		elm$html$Html$Attributes$class('mdc-tab--stacked')) : elm$core$Maybe$Nothing;
 };
-var author$project$Material$TabBar$viewTab = function (_n0) {
-	var config = _n0.aY;
-	var content = _n0.b9;
-	return A2(
-		elm$html$Html$button,
-		_Utils_ap(
+var author$project$Material$TabBar$viewTab = F2(
+	function (barConfig, _n0) {
+		var config = _n0.aY;
+		var content = _n0.b9;
+		return A2(
+			elm$html$Html$button,
+			_Utils_ap(
+				A2(
+					elm$core$List$filterMap,
+					elm$core$Basics$identity,
+					_List_fromArray(
+						[
+							author$project$Material$TabBar$tabCs,
+							author$project$Material$TabBar$tabRoleAttr,
+							author$project$Material$TabBar$tabStackedCs(barConfig),
+							author$project$Material$TabBar$tabMinWidthCs(barConfig),
+							author$project$Material$TabBar$tabClickHandler(config)
+						])),
+				config.h),
 			A2(
 				elm$core$List$filterMap,
 				elm$core$Basics$identity,
-				_List_fromArray(
+				barConfig.cr ? _List_fromArray(
 					[
-						author$project$Material$TabBar$tabCs,
-						author$project$Material$TabBar$tabRoleAttr,
-						author$project$Material$TabBar$tabStackedCs(config),
-						author$project$Material$TabBar$tabMinWidthCs(config),
-						author$project$Material$TabBar$tabClickHandler(config)
-					])),
-			config.h),
-		A2(
-			elm$core$List$filterMap,
-			elm$core$Basics$identity,
-			config.cr ? _List_fromArray(
+						A3(author$project$Material$TabBar$tabContentElt, barConfig, config, content),
+						author$project$Material$TabBar$tabRippleElt
+					]) : _List_fromArray(
+					[
+						A3(author$project$Material$TabBar$tabContentElt, barConfig, config, content),
+						author$project$Material$TabBar$tabIndicatorElt(config),
+						author$project$Material$TabBar$tabRippleElt
+					])));
+	});
+var author$project$Material$TabBar$tabScrollerScrollContentElt = F2(
+	function (barConfig, tabs) {
+		return A2(
+			elm$html$Html$div,
+			_List_fromArray(
 				[
-					A2(author$project$Material$TabBar$tabContentElt, config, content),
-					author$project$Material$TabBar$tabRippleElt
-				]) : _List_fromArray(
+					elm$html$Html$Attributes$class('mdc-tab-scroller__scroll-content')
+				]),
+			A2(
+				elm$core$List$map,
+				author$project$Material$TabBar$viewTab(barConfig),
+				tabs));
+	});
+var author$project$Material$TabBar$tabScrollerScrollAreaElt = F2(
+	function (barConfig, tabs) {
+		return A2(
+			elm$html$Html$div,
+			_List_fromArray(
 				[
-					A2(author$project$Material$TabBar$tabContentElt, config, content),
-					author$project$Material$TabBar$tabIndicatorElt(config),
-					author$project$Material$TabBar$tabRippleElt
-				])));
-};
-var author$project$Material$TabBar$tabScrollerScrollContentElt = function (tabs) {
-	return A2(
-		elm$html$Html$div,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('mdc-tab-scroller__scroll-content')
-			]),
-		A2(elm$core$List$map, author$project$Material$TabBar$viewTab, tabs));
-};
-var author$project$Material$TabBar$tabScrollerScrollAreaElt = function (tabs) {
-	return A2(
-		elm$html$Html$div,
-		_List_fromArray(
-			[
-				elm$html$Html$Attributes$class('mdc-tab-scroller__scroll-area')
-			]),
-		_List_fromArray(
-			[
-				author$project$Material$TabBar$tabScrollerScrollContentElt(tabs)
-			]));
-};
-var author$project$Material$TabBar$tabScroller = F2(
-	function (config, tabs) {
+					elm$html$Html$Attributes$class('mdc-tab-scroller__scroll-area')
+				]),
+			_List_fromArray(
+				[
+					A2(author$project$Material$TabBar$tabScrollerScrollContentElt, barConfig, tabs)
+				]));
+	});
+var author$project$Material$TabBar$tabScroller = F3(
+	function (barConfig, config, tabs) {
 		return A2(
 			elm$html$Html$div,
 			_Utils_ap(
@@ -15232,7 +15238,7 @@ var author$project$Material$TabBar$tabScroller = F2(
 				config.h),
 			_List_fromArray(
 				[
-					author$project$Material$TabBar$tabScrollerScrollAreaElt(tabs)
+					A2(author$project$Material$TabBar$tabScrollerScrollAreaElt, barConfig, tabs)
 				]));
 	});
 var author$project$Material$TabBar$tablistRoleAttr = elm$core$Maybe$Just(
@@ -15255,12 +15261,12 @@ var author$project$Material$TabBar$tabBar = F2(
 				config.h),
 			_List_fromArray(
 				[
-					A2(author$project$Material$TabBar$tabScroller, config.bl, tabs)
+					A3(author$project$Material$TabBar$tabScroller, config, config.bl, tabs)
 				]));
 	});
 var author$project$Material$TabBar$tabScrollerConfig = {h: _List_Nil, aU: elm$core$Maybe$Nothing};
-var author$project$Material$TabBar$tabBarConfig = {h: _List_Nil, bl: author$project$Material$TabBar$tabScrollerConfig};
-var author$project$Material$TabBar$tabConfig = {B: false, h: _List_Nil, cr: false, a7: false, bH: elm$core$Maybe$Nothing, cL: false};
+var author$project$Material$TabBar$tabBarConfig = {h: _List_Nil, cr: false, a7: false, cL: false, bl: author$project$Material$TabBar$tabScrollerConfig};
+var author$project$Material$TabBar$tabConfig = {B: false, h: _List_Nil, bH: elm$core$Maybe$Nothing};
 var author$project$Demo$TabBar$heroTabs = F2(
 	function (model, index) {
 		return A2(
@@ -15378,15 +15384,15 @@ var author$project$Demo$TabBar$tabsWithStackedIcons = function (model) {
 			author$project$Material$TabBar$tabConfig,
 			{
 				B: _Utils_eq(model.aF, index),
-				cr: true,
 				bH: elm$core$Maybe$Just(
-					author$project$Demo$TabBar$SetActiveStackedTab(index)),
-				cL: true
+					author$project$Demo$TabBar$SetActiveStackedTab(index))
 			});
 	};
 	return A2(
 		author$project$Material$TabBar$tabBar,
-		author$project$Material$TabBar$tabBarConfig,
+		_Utils_update(
+			author$project$Material$TabBar$tabBarConfig,
+			{cr: true, cL: true}),
 		_List_fromArray(
 			[
 				A2(
