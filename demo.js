@@ -4192,7 +4192,7 @@ function _Browser_getViewport()
 			aQ: _Browser_window.pageXOffset,
 			aR: _Browser_window.pageYOffset,
 			b$: _Browser_doc.documentElement.clientWidth,
-			E: _Browser_doc.documentElement.clientHeight
+			D: _Browser_doc.documentElement.clientHeight
 		}
 	};
 }
@@ -4203,7 +4203,7 @@ function _Browser_getScene()
 	var elem = _Browser_doc.documentElement;
 	return {
 		b$: Math.max(body.scrollWidth, body.offsetWidth, elem.scrollWidth, elem.offsetWidth, elem.clientWidth),
-		E: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
+		D: Math.max(body.scrollHeight, body.offsetHeight, elem.scrollHeight, elem.offsetHeight, elem.clientHeight)
 	};
 }
 
@@ -4228,13 +4228,13 @@ function _Browser_getViewportOf(id)
 		return {
 			bU: {
 				b$: node.scrollWidth,
-				E: node.scrollHeight
+				D: node.scrollHeight
 			},
 			b_: {
 				aQ: node.scrollLeft,
 				aR: node.scrollTop,
 				b$: node.clientWidth,
-				E: node.clientHeight
+				D: node.clientHeight
 			}
 		};
 	});
@@ -4269,13 +4269,13 @@ function _Browser_getElement(id)
 				aQ: x,
 				aR: y,
 				b$: _Browser_doc.documentElement.clientWidth,
-				E: _Browser_doc.documentElement.clientHeight
+				D: _Browser_doc.documentElement.clientHeight
 			},
 			ce: {
 				aQ: x + rect.left,
 				aR: y + rect.top,
 				b$: rect.width,
-				E: rect.height
+				D: rect.height
 			}
 		};
 	});
@@ -4752,7 +4752,7 @@ var author$project$Demo$Switch$defaultModel = {
 				_Utils_Tuple2('hero-switch', true)
 			]))
 };
-var author$project$Demo$TabBar$defaultModel = {C: 0, aD: 0, aE: 0, aF: 0};
+var author$project$Demo$TabBar$defaultModel = {B: 0, aD: 0, aE: 0, aF: 0};
 var author$project$Demo$TextFields$defaultModel = {l: ''};
 var author$project$Demo$Theme$defaultModel = {};
 var author$project$Demo$TopAppBar$defaultModel = {};
@@ -6115,7 +6115,7 @@ var author$project$Demo$TabBar$update = F2(
 				var index = msg.a;
 				return _Utils_update(
 					model,
-					{C: index});
+					{B: index});
 			case 1:
 				var index = msg.a;
 				return _Utils_update(
@@ -7826,16 +7826,15 @@ var author$project$Material$Drawer$closeHandler = function (_n0) {
 		onClose);
 };
 var author$project$Material$Drawer$Permanent = 0;
-var author$project$Material$Drawer$openAttr = function (_n0) {
-	var variant = _n0.z;
-	var open = _n0.cC;
-	return (open && variant) ? elm$core$Maybe$Just(
-		A2(elm$html$Html$Attributes$attribute, 'open', '')) : elm$core$Maybe$Nothing;
-};
+var author$project$Material$Drawer$openAttr = F2(
+	function (variant, _n0) {
+		var open = _n0.cC;
+		return (open && variant) ? elm$core$Maybe$Just(
+			A2(elm$html$Html$Attributes$attribute, 'open', '')) : elm$core$Maybe$Nothing;
+	});
 var author$project$Material$Drawer$rootCs = elm$core$Maybe$Just(
 	elm$html$Html$Attributes$class('mdc-drawer'));
-var author$project$Material$Drawer$variantCs = function (_n0) {
-	var variant = _n0.z;
+var author$project$Material$Drawer$variantCs = function (variant) {
 	switch (variant) {
 		case 0:
 			return elm$core$Maybe$Nothing;
@@ -7847,8 +7846,8 @@ var author$project$Material$Drawer$variantCs = function (_n0) {
 				elm$html$Html$Attributes$class('mdc-drawer--modal'));
 	}
 };
-var author$project$Material$Drawer$drawer = F2(
-	function (config, nodes) {
+var author$project$Material$Drawer$drawer = F3(
+	function (variant, config, nodes) {
 		return A3(
 			elm$html$Html$node,
 			'mdc-drawer',
@@ -7859,8 +7858,8 @@ var author$project$Material$Drawer$drawer = F2(
 					_List_fromArray(
 						[
 							author$project$Material$Drawer$rootCs,
-							author$project$Material$Drawer$variantCs(config),
-							author$project$Material$Drawer$openAttr(config),
+							author$project$Material$Drawer$variantCs(variant),
+							A2(author$project$Material$Drawer$openAttr, variant, config),
 							author$project$Material$Drawer$closeHandler(config)
 						])),
 				config.h),
@@ -7868,14 +7867,9 @@ var author$project$Material$Drawer$drawer = F2(
 	});
 var author$project$Material$Drawer$dismissibleDrawer = F2(
 	function (config, nodes) {
-		return A2(
-			author$project$Material$Drawer$drawer,
-			_Utils_update(
-				config,
-				{z: 1}),
-			nodes);
+		return A3(author$project$Material$Drawer$drawer, 1, config, nodes);
 	});
-var author$project$Material$Drawer$drawerConfig = {h: _List_Nil, aK: elm$core$Maybe$Nothing, cC: false, z: 0};
+var author$project$Material$Drawer$drawerConfig = {h: _List_Nil, aK: elm$core$Maybe$Nothing, cC: false};
 var author$project$Material$Drawer$drawerContent = F2(
 	function (attributes, nodes) {
 		return A2(
@@ -7953,6 +7947,7 @@ var author$project$Material$TopAppBar$section = F2(
 			nodes);
 	});
 var author$project$Material$TopAppBar$title = elm$html$Html$Attributes$class('mdc-top-app-bar__title');
+var author$project$Material$TopAppBar$Default = 0;
 var author$project$Material$TopAppBar$denseCs = function (_n0) {
 	var dense = _n0.ca;
 	return dense ? elm$core$Maybe$Just(
@@ -7965,8 +7960,7 @@ var author$project$Material$TopAppBar$fixedCs = function (_n0) {
 };
 var author$project$Material$TopAppBar$rootCs = elm$core$Maybe$Just(
 	elm$html$Html$Attributes$class('mdc-top-app-bar'));
-var author$project$Material$TopAppBar$variantCs = function (_n0) {
-	var variant = _n0.z;
+var author$project$Material$TopAppBar$variantCs = function (variant) {
 	switch (variant) {
 		case 0:
 			return elm$core$Maybe$Nothing;
@@ -7981,8 +7975,8 @@ var author$project$Material$TopAppBar$variantCs = function (_n0) {
 				elm$html$Html$Attributes$class('mdc-top-app-bar--prominent'));
 	}
 };
-var author$project$Material$TopAppBar$topAppBar = F2(
-	function (config, nodes) {
+var author$project$Material$TopAppBar$genericTopAppBar = F3(
+	function (variant, config, nodes) {
 		return A3(
 			elm$html$Html$node,
 			'mdc-top-app-bar',
@@ -7993,15 +7987,18 @@ var author$project$Material$TopAppBar$topAppBar = F2(
 					_List_fromArray(
 						[
 							author$project$Material$TopAppBar$rootCs,
-							author$project$Material$TopAppBar$variantCs(config),
+							author$project$Material$TopAppBar$variantCs(variant),
 							author$project$Material$TopAppBar$denseCs(config),
 							author$project$Material$TopAppBar$fixedCs(config)
 						])),
 				config.h),
 			nodes);
 	});
-var author$project$Material$TopAppBar$Default = 0;
-var author$project$Material$TopAppBar$topAppBarConfig = {h: _List_Nil, ca: false, cg: false, z: 0};
+var author$project$Material$TopAppBar$topAppBar = F2(
+	function (config, nodes) {
+		return A3(author$project$Material$TopAppBar$genericTopAppBar, 0, config, nodes);
+	});
+var author$project$Material$TopAppBar$topAppBarConfig = {h: _List_Nil, ca: false, cg: false};
 var author$project$Material$Typography$body1 = elm$html$Html$Attributes$class('mdc-typography--body1');
 var author$project$Material$Typography$headline5 = elm$html$Html$Attributes$class('mdc-typography--headline5');
 var elm$html$Html$h1 = _VirtualDom_node('h1');
@@ -9807,12 +9804,7 @@ var author$project$Demo$DismissibleDrawer$view = function (model) {
 };
 var author$project$Material$Drawer$permanentDrawer = F2(
 	function (config, nodes) {
-		return A2(
-			author$project$Material$Drawer$drawer,
-			_Utils_update(
-				config,
-				{z: 0}),
-			nodes);
+		return A3(author$project$Material$Drawer$drawer, 0, config, nodes);
 	});
 var elm$html$Html$Attributes$href = function (url) {
 	return A2(
@@ -10413,6 +10405,10 @@ var author$project$Demo$Elevation$view = function (model) {
 		cP: 'Elevation'
 	};
 };
+var author$project$Material$Fab$clickHandler = function (_n0) {
+	var onClick = _n0.bH;
+	return A2(elm$core$Maybe$map, elm$html$Html$Events$onClick, onClick);
+};
 var author$project$Material$Fab$exitedCs = function (_n0) {
 	var exited = _n0.T;
 	return exited ? elm$core$Maybe$Just(
@@ -10492,7 +10488,8 @@ var author$project$Material$Fab$extendedFab = F2(
 						[
 							author$project$Material$Fab$rootCs,
 							author$project$Material$Fab$extendedFabCs,
-							author$project$Material$Fab$exitedCs(config)
+							author$project$Material$Fab$exitedCs(config),
+							author$project$Material$Fab$clickHandler(config)
 						])),
 				config.h),
 			A2(
@@ -10505,7 +10502,7 @@ var author$project$Material$Fab$extendedFab = F2(
 						author$project$Material$Fab$trailingIconElt(config)
 					])));
 	});
-var author$project$Material$Fab$extendedFabConfig = {h: _List_Nil, T: false, co: elm$core$Maybe$Nothing, cR: false};
+var author$project$Material$Fab$extendedFabConfig = {h: _List_Nil, T: false, co: elm$core$Maybe$Nothing, bH: elm$core$Maybe$Nothing, cR: false};
 var author$project$Material$Fab$iconElt = function (iconName) {
 	return A2(
 		elm$html$Html$span,
@@ -10537,7 +10534,8 @@ var author$project$Material$Fab$fab = F2(
 						[
 							author$project$Material$Fab$rootCs,
 							author$project$Material$Fab$miniCs(config),
-							author$project$Material$Fab$exitedCs(config)
+							author$project$Material$Fab$exitedCs(config),
+							author$project$Material$Fab$clickHandler(config)
 						])),
 				config.h),
 			_List_fromArray(
@@ -10545,7 +10543,7 @@ var author$project$Material$Fab$fab = F2(
 					author$project$Material$Fab$iconElt(iconName)
 				]));
 	});
-var author$project$Material$Fab$fabConfig = {h: _List_Nil, T: false, bC: false};
+var author$project$Material$Fab$fabConfig = {h: _List_Nil, T: false, bC: false, bH: elm$core$Maybe$Nothing};
 var author$project$Demo$Fabs$view = function (model) {
 	return {
 		b9: _List_fromArray(
@@ -11423,8 +11421,7 @@ var author$project$Material$LinearProgress$Buffered = F2(
 		return {$: 2, a: a, b: b};
 	});
 var elm$core$String$fromFloat = _String_fromNumber;
-var author$project$Material$LinearProgress$bufferAttr = function (_n0) {
-	var variant = _n0.z;
+var author$project$Material$LinearProgress$bufferAttr = function (variant) {
 	if (variant.$ === 2) {
 		var buffer = variant.b;
 		return elm$core$Maybe$Just(
@@ -11456,8 +11453,7 @@ var author$project$Material$LinearProgress$closedAttr = function (_n0) {
 		A2(elm$html$Html$Attributes$attribute, 'closed', '')) : elm$core$Maybe$Nothing;
 };
 var author$project$Material$LinearProgress$Indeterminate = {$: 0};
-var author$project$Material$LinearProgress$determinateAttr = function (_n0) {
-	var variant = _n0.z;
+var author$project$Material$LinearProgress$determinateAttr = function (variant) {
 	return (!_Utils_eq(variant, author$project$Material$LinearProgress$Indeterminate)) ? elm$core$Maybe$Just(
 		A2(elm$html$Html$Attributes$attribute, 'determinate', '')) : elm$core$Maybe$Nothing;
 };
@@ -11478,8 +11474,7 @@ var author$project$Material$LinearProgress$primaryBarElt = A2(
 		]),
 	_List_fromArray(
 		[author$project$Material$LinearProgress$barInnerElt]));
-var author$project$Material$LinearProgress$progressAttr = function (_n0) {
-	var variant = _n0.z;
+var author$project$Material$LinearProgress$progressAttr = function (variant) {
 	switch (variant.$) {
 		case 1:
 			var progress = variant.a;
@@ -11516,8 +11511,7 @@ var author$project$Material$LinearProgress$secondaryBarElt = A2(
 		]),
 	_List_fromArray(
 		[author$project$Material$LinearProgress$barInnerElt]));
-var author$project$Material$LinearProgress$variantCs = function (_n0) {
-	var variant = _n0.z;
+var author$project$Material$LinearProgress$variantCs = function (variant) {
 	if (!variant.$) {
 		return elm$core$Maybe$Just(
 			elm$html$Html$Attributes$class('mdc-linear-progress--indeterminate'));
@@ -11525,40 +11519,39 @@ var author$project$Material$LinearProgress$variantCs = function (_n0) {
 		return elm$core$Maybe$Nothing;
 	}
 };
-var author$project$Material$LinearProgress$linearProgress = function (config) {
-	return A3(
-		elm$html$Html$node,
-		'mdc-linear-progress',
-		_Utils_ap(
-			A2(
-				elm$core$List$filterMap,
-				elm$core$Basics$identity,
-				_List_fromArray(
-					[
-						author$project$Material$LinearProgress$rootCs,
-						author$project$Material$LinearProgress$displayCss,
-						author$project$Material$LinearProgress$roleAttr,
-						author$project$Material$LinearProgress$variantCs(config),
-						author$project$Material$LinearProgress$determinateAttr(config),
-						author$project$Material$LinearProgress$progressAttr(config),
-						author$project$Material$LinearProgress$bufferAttr(config),
-						author$project$Material$LinearProgress$reverseAttr(config),
-						author$project$Material$LinearProgress$closedAttr(config)
-					])),
-			config.h),
-		_List_fromArray(
-			[author$project$Material$LinearProgress$bufferingDotsElt, author$project$Material$LinearProgress$bufferElt, author$project$Material$LinearProgress$primaryBarElt, author$project$Material$LinearProgress$secondaryBarElt]));
-};
+var author$project$Material$LinearProgress$linearProgress = F2(
+	function (variant, config) {
+		return A3(
+			elm$html$Html$node,
+			'mdc-linear-progress',
+			_Utils_ap(
+				A2(
+					elm$core$List$filterMap,
+					elm$core$Basics$identity,
+					_List_fromArray(
+						[
+							author$project$Material$LinearProgress$rootCs,
+							author$project$Material$LinearProgress$displayCss,
+							author$project$Material$LinearProgress$roleAttr,
+							author$project$Material$LinearProgress$variantCs(variant),
+							author$project$Material$LinearProgress$determinateAttr(variant),
+							author$project$Material$LinearProgress$progressAttr(variant),
+							author$project$Material$LinearProgress$bufferAttr(variant),
+							author$project$Material$LinearProgress$reverseAttr(config),
+							author$project$Material$LinearProgress$closedAttr(config)
+						])),
+				config.h),
+			_List_fromArray(
+				[author$project$Material$LinearProgress$bufferingDotsElt, author$project$Material$LinearProgress$bufferElt, author$project$Material$LinearProgress$primaryBarElt, author$project$Material$LinearProgress$secondaryBarElt]));
+	});
 var author$project$Material$LinearProgress$bufferedLinearProgress = F2(
 	function (config, _n0) {
 		var progress = _n0.aL;
 		var buffered = _n0.bq;
-		return author$project$Material$LinearProgress$linearProgress(
-			_Utils_update(
-				config,
-				{
-					z: A2(author$project$Material$LinearProgress$Buffered, progress, buffered)
-				}));
+		return A2(
+			author$project$Material$LinearProgress$linearProgress,
+			A2(author$project$Material$LinearProgress$Buffered, progress, buffered),
+			config);
 	});
 var author$project$Material$LinearProgress$Determinate = function (a) {
 	return {$: 1, a: a};
@@ -11566,20 +11559,15 @@ var author$project$Material$LinearProgress$Determinate = function (a) {
 var author$project$Material$LinearProgress$determinateLinearProgress = F2(
 	function (config, _n0) {
 		var progress = _n0.aL;
-		return author$project$Material$LinearProgress$linearProgress(
-			_Utils_update(
-				config,
-				{
-					z: author$project$Material$LinearProgress$Determinate(progress)
-				}));
+		return A2(
+			author$project$Material$LinearProgress$linearProgress,
+			author$project$Material$LinearProgress$Determinate(progress),
+			config);
 	});
 var author$project$Material$LinearProgress$indeterminateLinearProgress = function (config) {
-	return author$project$Material$LinearProgress$linearProgress(
-		_Utils_update(
-			config,
-			{z: author$project$Material$LinearProgress$Indeterminate}));
+	return A2(author$project$Material$LinearProgress$linearProgress, author$project$Material$LinearProgress$Indeterminate, config);
 };
-var author$project$Material$LinearProgress$linearProgressConfig = {h: _List_Nil, aW: false, bT: false, z: author$project$Material$LinearProgress$Indeterminate};
+var author$project$Material$LinearProgress$linearProgressConfig = {h: _List_Nil, aW: false, bT: false};
 var author$project$Demo$LinearProgress$view = function (model) {
 	return {
 		b9: _List_fromArray(
@@ -12672,12 +12660,7 @@ var author$project$Material$Drawer$drawerScrim = F2(
 var author$project$Material$Drawer$Modal = 2;
 var author$project$Material$Drawer$modalDrawer = F2(
 	function (config, nodes) {
-		return A2(
-			author$project$Material$Drawer$drawer,
-			_Utils_update(
-				config,
-				{z: 2}),
-			nodes);
+		return A3(author$project$Material$Drawer$drawer, 2, config, nodes);
 	});
 var author$project$Demo$ModalDrawer$view = function (model) {
 	return {
@@ -12712,12 +12695,7 @@ var author$project$Material$TopAppBar$prominentFixedAdjust = elm$html$Html$Attri
 var author$project$Material$TopAppBar$Prominent = 3;
 var author$project$Material$TopAppBar$prominentTopAppBar = F2(
 	function (config, nodes) {
-		return A2(
-			author$project$Material$TopAppBar$topAppBar,
-			_Utils_update(
-				config,
-				{z: 3}),
-			nodes);
+		return A3(author$project$Material$TopAppBar$genericTopAppBar, 3, config, nodes);
 	});
 var author$project$Demo$ProminentTopAppBar$view = function (model) {
 	return {
@@ -13142,7 +13120,7 @@ var author$project$Demo$Selects$SetEnhancedValue = function (a) {
 	return {$: 1, a: a};
 };
 var author$project$Material$Select$Enhanced$Filled = 0;
-var author$project$Material$Select$Enhanced$enhancedSelectConfig = {h: _List_Nil, aZ: false, b: '', z: 0, b$: elm$core$Maybe$Nothing};
+var author$project$Material$Select$Enhanced$enhancedSelectConfig = {h: _List_Nil, aZ: false, b: '', H: 0, b$: elm$core$Maybe$Nothing};
 var author$project$Material$Select$Enhanced$Outlined = 1;
 var author$project$Material$Select$Enhanced$disabledCs = function (_n0) {
 	var disabled = _n0.aZ;
@@ -13253,7 +13231,7 @@ var author$project$Material$Select$Enhanced$selectedTextElt = A2(
 		]),
 	_List_Nil);
 var author$project$Material$Select$Enhanced$variantCs = function (_n0) {
-	var variant = _n0.z;
+	var variant = _n0.H;
 	return (variant === 1) ? elm$core$Maybe$Just(
 		elm$html$Html$Attributes$class('mdc-select--outlined')) : elm$core$Maybe$Nothing;
 };
@@ -13283,7 +13261,7 @@ var author$project$Material$Select$Enhanced$enhancedSelect = F2(
 							author$project$Material$Select$Enhanced$selectedTextElt,
 							author$project$Material$Select$Enhanced$menuElt(nodes)
 						]),
-						(config.z === 1) ? _List_fromArray(
+						(config.H === 1) ? _List_fromArray(
 						[
 							author$project$Material$Select$Enhanced$notchedOutlineElt(config)
 						]) : _List_fromArray(
@@ -13299,7 +13277,7 @@ var author$project$Material$Select$Enhanced$filledEnhancedSelect = F2(
 			author$project$Material$Select$Enhanced$enhancedSelect,
 			_Utils_update(
 				config,
-				{z: 0}),
+				{H: 0}),
 			nodes);
 	});
 var author$project$Material$Select$Enhanced$listItemActivatedCs = function (_n0) {
@@ -13623,13 +13601,12 @@ var author$project$Material$Select$notchedOutlineElt = function (_n0) {
 };
 var author$project$Material$Select$rootCs = elm$core$Maybe$Just(
 	elm$html$Html$Attributes$class('mdc-select'));
-var author$project$Material$Select$variantCs = function (_n0) {
-	var variant = _n0.z;
+var author$project$Material$Select$variantCs = function (variant) {
 	return (variant === 1) ? elm$core$Maybe$Just(
 		elm$html$Html$Attributes$class('mdc-select--outlined')) : elm$core$Maybe$Nothing;
 };
-var author$project$Material$Select$select = F2(
-	function (config, nodes) {
+var author$project$Material$Select$select = F3(
+	function (variant, config, nodes) {
 		return A3(
 			elm$html$Html$node,
 			'mdc-select',
@@ -13640,7 +13617,7 @@ var author$project$Material$Select$select = F2(
 					_List_fromArray(
 						[
 							author$project$Material$Select$rootCs,
-							author$project$Material$Select$variantCs(config)
+							author$project$Material$Select$variantCs(variant)
 						])),
 				config.h),
 			elm$core$List$concat(
@@ -13651,7 +13628,7 @@ var author$project$Material$Select$select = F2(
 							author$project$Material$Select$dropdownIconElt,
 							A2(author$project$Material$Select$nativeControlElt, config, nodes)
 						]),
-						(config.z === 1) ? _List_fromArray(
+						(variant === 1) ? _List_fromArray(
 						[
 							author$project$Material$Select$notchedOutlineElt(config)
 						]) : _List_fromArray(
@@ -13663,14 +13640,9 @@ var author$project$Material$Select$select = F2(
 	});
 var author$project$Material$Select$filledSelect = F2(
 	function (config, nodes) {
-		return A2(
-			author$project$Material$Select$select,
-			_Utils_update(
-				config,
-				{z: 0}),
-			nodes);
+		return A3(author$project$Material$Select$select, 0, config, nodes);
 	});
-var author$project$Material$Select$selectConfig = {h: _List_Nil, b: '', cy: elm$core$Maybe$Nothing, l: elm$core$Maybe$Nothing, z: 0};
+var author$project$Material$Select$selectConfig = {h: _List_Nil, b: '', cy: elm$core$Maybe$Nothing, l: elm$core$Maybe$Nothing};
 var author$project$Demo$Selects$filledSelects = function (model) {
 	return A2(
 		elm$html$Html$div,
@@ -13710,12 +13682,7 @@ var author$project$Demo$Selects$heroSelects = function (model) {
 };
 var author$project$Material$Select$outlinedSelect = F2(
 	function (config, nodes) {
-		return A2(
-			author$project$Material$Select$select,
-			_Utils_update(
-				config,
-				{z: 1}),
-			nodes);
+		return A3(author$project$Material$Select$select, 1, config, nodes);
 	});
 var author$project$Demo$Selects$outlinedSelects = function (model) {
 	return A2(
@@ -13832,12 +13799,7 @@ var author$project$Demo$Selects$view = function (model) {
 var author$project$Material$TopAppBar$ShortCollapsed = 2;
 var author$project$Material$TopAppBar$shortCollapsedTopAppBar = F2(
 	function (config, nodes) {
-		return A2(
-			author$project$Material$TopAppBar$topAppBar,
-			_Utils_update(
-				config,
-				{z: 2}),
-			nodes);
+		return A3(author$project$Material$TopAppBar$genericTopAppBar, 2, config, nodes);
 	});
 var author$project$Material$TopAppBar$shortFixedAdjust = elm$html$Html$Attributes$class('mdc-top-app-bar--short-fixed-adjust');
 var author$project$Demo$ShortCollapsedTopAppBar$view = function (model) {
@@ -13892,12 +13854,7 @@ var author$project$Demo$ShortCollapsedTopAppBar$view = function (model) {
 var author$project$Material$TopAppBar$Short = 1;
 var author$project$Material$TopAppBar$shortTopAppBar = F2(
 	function (config, nodes) {
-		return A2(
-			author$project$Material$TopAppBar$topAppBar,
-			_Utils_update(
-				config,
-				{z: 1}),
-			nodes);
+		return A3(author$project$Material$TopAppBar$genericTopAppBar, 1, config, nodes);
 	});
 var author$project$Demo$ShortTopAppBar$view = function (model) {
 	return {
@@ -15021,7 +14978,7 @@ var author$project$Material$TabBar$activeTabAttr = function (tabs) {
 					elm$core$List$filter,
 					function (_n0) {
 						var config = _n0.b.aY;
-						return config.B;
+						return config.A;
 					},
 					A2(elm$core$List$indexedMap, elm$core$Tuple$pair, tabs)))));
 	return A2(
@@ -15266,7 +15223,7 @@ var author$project$Material$TabBar$tabBar = F2(
 	});
 var author$project$Material$TabBar$tabScrollerConfig = {h: _List_Nil, aU: elm$core$Maybe$Nothing};
 var author$project$Material$TabBar$tabBarConfig = {h: _List_Nil, cr: false, a7: false, cL: false, bl: author$project$Material$TabBar$tabScrollerConfig};
-var author$project$Material$TabBar$tabConfig = {B: false, h: _List_Nil, bH: elm$core$Maybe$Nothing};
+var author$project$Material$TabBar$tabConfig = {A: false, h: _List_Nil, bH: elm$core$Maybe$Nothing};
 var author$project$Demo$TabBar$heroTabs = F2(
 	function (model, index) {
 		return A2(
@@ -15279,7 +15236,7 @@ var author$project$Demo$TabBar$heroTabs = F2(
 					_Utils_update(
 						author$project$Material$TabBar$tabConfig,
 						{
-							B: !model.C,
+							A: !model.B,
 							bH: elm$core$Maybe$Just(
 								author$project$Demo$TabBar$SetActiveHeroTab(0))
 						}),
@@ -15289,7 +15246,7 @@ var author$project$Demo$TabBar$heroTabs = F2(
 					_Utils_update(
 						author$project$Material$TabBar$tabConfig,
 						{
-							B: model.C === 1,
+							A: model.B === 1,
 							bH: elm$core$Maybe$Just(
 								author$project$Demo$TabBar$SetActiveHeroTab(1))
 						}),
@@ -15299,7 +15256,7 @@ var author$project$Demo$TabBar$heroTabs = F2(
 					_Utils_update(
 						author$project$Material$TabBar$tabConfig,
 						{
-							B: model.C === 2,
+							A: model.B === 2,
 							bH: elm$core$Maybe$Just(
 								author$project$Demo$TabBar$SetActiveHeroTab(2))
 						}),
@@ -15314,7 +15271,7 @@ var author$project$Demo$TabBar$scrollingTabs = function (model) {
 		return _Utils_update(
 			author$project$Material$TabBar$tabConfig,
 			{
-				B: _Utils_eq(model.aE, index),
+				A: _Utils_eq(model.aE, index),
 				bH: elm$core$Maybe$Just(
 					author$project$Demo$TabBar$SetActiveScrollingTab(index))
 			});
@@ -15342,7 +15299,7 @@ var author$project$Demo$TabBar$tabsWithIcons = function (model) {
 		return _Utils_update(
 			author$project$Material$TabBar$tabConfig,
 			{
-				B: _Utils_eq(model.aD, index),
+				A: _Utils_eq(model.aD, index),
 				bH: elm$core$Maybe$Just(
 					author$project$Demo$TabBar$SetActiveIconTab(index))
 			});
@@ -15383,7 +15340,7 @@ var author$project$Demo$TabBar$tabsWithStackedIcons = function (model) {
 		return _Utils_update(
 			author$project$Material$TabBar$tabConfig,
 			{
-				B: _Utils_eq(model.aF, index),
+				A: _Utils_eq(model.aF, index),
 				bH: elm$core$Maybe$Just(
 					author$project$Demo$TabBar$SetActiveStackedTab(index))
 			});
