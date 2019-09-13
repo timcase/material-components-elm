@@ -57,6 +57,7 @@ import Html.Attributes exposing (class)
 -}
 type alias HelperTextConfig msg =
     { persistent : Bool
+    , validationMsg : Bool
     , additionalAttributes : List (Html.Attribute msg)
     }
 
@@ -66,6 +67,7 @@ type alias HelperTextConfig msg =
 helperTextConfig : HelperTextConfig msg
 helperTextConfig =
     { persistent = False
+    , validationMsg = False
     , additionalAttributes = []
     }
 
@@ -81,6 +83,7 @@ helperText config string =
         (List.filterMap identity
             [ helperTextCs
             , persistentCs config
+            , validationMsgCs config
             , ariaHiddenAttr
             ]
             ++ config.additionalAttributes
@@ -113,6 +116,15 @@ persistentCs : HelperTextConfig msg -> Maybe (Html.Attribute msg)
 persistentCs config =
     if config.persistent then
         Just (class "mdc-text-field-helper-text--persistent")
+
+    else
+        Nothing
+
+
+validationMsgCs : HelperTextConfig msg -> Maybe (Html.Attribute msg)
+validationMsgCs config =
+    if config.validationMsg then
+        Just (class "mdc-text-field-helper-text--validation--msg")
 
     else
         Nothing

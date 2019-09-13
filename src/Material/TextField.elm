@@ -247,6 +247,7 @@ textField config =
             , outlinedCs config
             , fullwidthCs config
             , textareaCs config
+            , invalidCs config
             , disabledCs config
             , withLeadingIconCs config
             , withTrailingIconCs config
@@ -350,6 +351,15 @@ withTrailingIconCs : TextFieldConfig msg -> Maybe (Html.Attribute msg)
 withTrailingIconCs { trailingIcon } =
     if trailingIcon /= NoIcon then
         Just (class "mdc-text-field--with-trailing-icon")
+
+    else
+        Nothing
+
+
+invalidCs : TextFieldConfig msg -> Maybe (Html.Attribute msg)
+invalidCs { invalid } =
+    if invalid then
+        Just (class "mdc-text-field--invalid")
 
     else
         Nothing
