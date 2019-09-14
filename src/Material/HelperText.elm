@@ -57,7 +57,7 @@ import Html.Attributes exposing (class)
 -}
 type alias HelperTextConfig msg =
     { persistent : Bool
-    , validationMsg : Bool
+    , invalid : Bool
     , additionalAttributes : List (Html.Attribute msg)
     }
 
@@ -67,7 +67,7 @@ type alias HelperTextConfig msg =
 helperTextConfig : HelperTextConfig msg
 helperTextConfig =
     { persistent = False
-    , validationMsg = False
+    , invalid = False
     , additionalAttributes = []
     }
 
@@ -123,7 +123,7 @@ persistentCs config =
 
 validationMsgCs : HelperTextConfig msg -> Maybe (Html.Attribute msg)
 validationMsgCs config =
-    if config.validationMsg then
+    if config.invalid then
         Just (class "mdc-text-field-helper-text--validation--msg")
 
     else
