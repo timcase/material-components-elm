@@ -98,8 +98,11 @@ class MdcTextField extends HTMLElement {
       this.getAdapter_(),
       this.getFoundationMap_()
     );
+    const isInvalid = !this.input_.hasAttribute("invalid");
+
     this.foundation_.init();
     this.foundation_.setValue(this.getAttribute("value") || "");
+    this.foundation_.setValid(isInvalid);
   }
 
   disconnectedCallback() {
