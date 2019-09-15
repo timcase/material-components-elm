@@ -124,7 +124,7 @@ persistentCs config =
 validationMsgCs : HelperTextConfig msg -> Maybe (Html.Attribute msg)
 validationMsgCs config =
     if config.invalid then
-        Just (class "mdc-text-field-helper-text--validation--msg")
+        Just (class "mdc-text-field-helper-text--validation-msg")
 
     else
         Nothing
